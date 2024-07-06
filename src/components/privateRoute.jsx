@@ -1,0 +1,37 @@
+import React, { useContext, useEffect, useState, useRef } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import Loading from './loading';
+
+const PrivateRoute = ({ children, roles, redirectTo = "/" }) => {
+    const { authData, isTokenExpired, logout } = useContext(AuthContext);
+    const [isAllowed, setIsAllowed] = useState(null);
+    const alertShown = useRef(false); 
+    useEffect(() => {
+        if (isTokenExpired()) {
+            if (!alertShown.current) {
+                alert('Session has expired. Please log in again.');
+                alertShown.current = true;  
+                logout();
+                setIsAllowed(false);
+            }
+        } else if (roles && !roles.includes(authData.user.role)) {
+            setIsAllowed(false);
+        } else {
+            setIsAllowed(true);
+        }
+    }, [authData, isTokenExpired, logout, roles]);
+
+    if (isAllowed === null) {
+        //mostrar un spinner o algún indicador de carga mientras se determina el estado de autorización.
+        return <Loading />;
+    }
+
+    if (!isAllowed) {
+        return <Navigate to={redirectTo} />;
+    }
+
+    return children ? children : <Outlet />;
+};
+
+export default PrivateRoute;
