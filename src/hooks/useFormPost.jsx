@@ -1,14 +1,13 @@
-// src/hooks/useForm.js
 import { useState, useContext } from 'react';
 import useHttp from './useHttp.jsx';
 import { validate } from '../utils/validate';
 import { AuthContext } from '../context/AuthContext';
 
-const useFormPost = (initialValues, url, method = 'POST', header = null) => {
+const useFormPost = (initialValues, requiredFields, url, method = 'POST', header = null, transformData = null) => {
     const [formData, setFormData] = useState(initialValues);
     const [errors, setErrors] = useState({});
     const { authData, isTokenExpired, logout } = useContext(AuthContext);
-    const { data, loading, error, sendRequest } = useHttp();
+    const { data, loading, error, errorResponse, sendRequest } = useHttp();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,15 +19,19 @@ const useFormPost = (initialValues, url, method = 'POST', header = null) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const validationErrors = validate(formData);
+        const validationErrors = validate(formData, requiredFields);
         setErrors(validationErrors);
-
+        console.log(Object.keys(validationErrors))
         if (Object.keys(validationErrors).length === 0) {
             if (authData && isTokenExpired()) {
                 alert('Session has expired. Please log in again.');
                 logout();
             } else {
-                await sendRequest(url, method, formData, null);
+                let transformedData = formData;
+                if (transformData) {
+                    transformedData = transformData(formData);
+                }
+                await sendRequest(url, method, transformedData, header);
             }
         }
     };
@@ -41,6 +44,7 @@ const useFormPost = (initialValues, url, method = 'POST', header = null) => {
         data,
         loading,
         error,
+        errorResponse
     };
 };
 

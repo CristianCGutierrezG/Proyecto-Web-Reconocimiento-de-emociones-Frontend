@@ -18,6 +18,12 @@ export default function LogIn() {
         password: '',
     };
 
+    const requiredFields = {
+        email: true,
+        password: true
+    };
+    
+
     const {
         formData,
         errors,
@@ -25,8 +31,8 @@ export default function LogIn() {
         handleSubmit,
         data,
         loading,
-        error,
-    } = useFormPost(initialValues, 'http://localhost:3001/api/v1/auth/login');
+        error
+    } = useFormPost(initialValues, requiredFields, 'http://localhost:3001/api/v1/auth/login');
 
     useEffect(() => {
         if (data) {
@@ -49,7 +55,7 @@ export default function LogIn() {
     }, [error]);
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="sm">
             <Box className="root">
                 <Typography component="h1" variant="h5">
                     Iniciar sesión
@@ -78,7 +84,7 @@ export default function LogIn() {
                         className="textfield"
                         variant="outlined"
                         margin="normal"
-                        requireds
+                        required
                         fullWidth
                         name="password"
                         label="Contraseña"
@@ -104,7 +110,7 @@ export default function LogIn() {
                     </Button>
                 </form>
                 {loading && <Loading />}
-                {customError && <Typography color="error">Error: {customError}</Typography>}
+                {error && <Typography color="error">Error: {customError}</Typography>}
             </Box>
         </Container>
     );

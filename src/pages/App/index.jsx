@@ -51,18 +51,18 @@ function App() {
           </Route>
           <Route path="/get" element={<FetchGetComponent />} />
           <Route path="/post" element={<FetchPostComponent />} />
-          <Route element={<PrivateRoute roles={['Administrador', 'Profesor']} />}>
+          <Route element={<PrivateRoute roles={['Administrador', 'Profesor']} redirectTo={"/home"} />}>
             <Route path="/emociones-profesor" element={<EmocionesProfesor />} />
             <Route path="/materias-profesor" element={<MateriasProfesor />} />
           </Route>
-          <Route element={<PrivateRoute roles={['Administrador', 'Estudiante', 'Profesor']} />}>
+          <Route element={<PrivateRoute roles={['Administrador', 'Estudiante', 'Profesor']} redirectTo={"/home"}  />}>
             <Route path="/emociones-estudiante" element={<EmocionesEstudiante />} />
           </Route>
-          <Route element={<PrivateRoute roles={['Administrador', 'Estudiante']} />}>
+          <Route element={<PrivateRoute roles={['Administrador', 'Estudiante']} redirectTo={"/home"}/>}>
             <Route path="/materias-estudiante" element={<MateriasEstudiante />} />
             <Route path="/configuracion-estudiante" element={<ConfiguracionEstudiante />} />
           </Route>
-          <Route element={<PrivateRoute roles={['Administrador','ProSalud']} />}>
+          <Route element={<PrivateRoute roles={['Administrador','ProSalud']} redirectTo={"/home"} />}>
             <Route path="/emociones-proSalud" element={<EmocionesProSalud />} />
           </Route>
         </Routes>

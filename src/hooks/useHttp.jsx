@@ -4,6 +4,7 @@ function useHttp() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [errorResponse, setErrorResponse] = useState(null);
 
     const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
         setLoading(true);
@@ -25,8 +26,9 @@ function useHttp() {
             const response = await fetch(url, options);
 
             if (!response.ok) {
-                console.log(response);
-                throw new Error(response.statusText);
+                const errorResponse = await response.json(); 
+                setErrorResponse(errorResponse.message);
+                throw new Error(errorResponse.message);
             }
 
             const result = await response.json();
@@ -38,7 +40,7 @@ function useHttp() {
         }
     }, []);
 
-    return { data, loading, error, sendRequest };
+    return { data, loading, error, errorResponse, sendRequest };
 }
 
 export default useHttp;

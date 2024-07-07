@@ -23,7 +23,6 @@ const PrivateRoute = ({ children, roles, redirectTo = "/" }) => {
     }, [authData, isTokenExpired, logout, roles]);
 
     if (isAllowed === null) {
-        //mostrar un spinner o algún indicador de carga mientras se determina el estado de autorización.
         return <Loading />;
     }
 

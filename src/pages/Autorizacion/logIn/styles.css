@@ -2,12 +2,12 @@
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
-a{
+/* a{
     text-decoration: none;
     margin-top: 8px;
     color: #9155E0; 
     font-size: 14px;
-}
+} */
 
 button{
     margin: 24px 0 16px !important;
@@ -34,6 +34,14 @@ button{
 .submit {
     margin: 24px 0 16px;
     background-color: #677C99;
+    border-radius: 8px
+}
+
+.link {
+    text-decoration: none;
+    margin-top: 8px;
+    color: #9155E0; 
+    font-size: 14px;
 }
 
 .link:hover {
