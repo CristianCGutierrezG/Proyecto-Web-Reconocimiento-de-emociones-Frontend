@@ -3,6 +3,7 @@ import React from 'react';
 import { AuthProvider } from '../../context/AuthContext.jsx';
 import LogIn from '../Autorizacion/logIn/index.jsx';
 import Recover from '../Autorizacion/recover/index.jsx';
+import ChangePassword from '../Autorizacion/changePassword/index.jsx';
 import Register from '../Autorizacion/register/index.jsx';
 import Home from '../pagina/home/index.jsx';
 import FetchGetComponent from '../HttpPruebas/fetchGetComponent.jsx';
@@ -20,8 +21,9 @@ const Navigation = () => {
     <nav>
       <ul>
         <li><NavLink to="/" end>Log in</NavLink></li>
-        <li><NavLink to="/recover">Recover Password</NavLink></li>
-        <li><NavLink to="/register">Register</NavLink></li>
+        <li><NavLink to="/recuperacion">Recover Password</NavLink></li>
+        <li><NavLink to="/cambio-contrasena">Cambiar Password</NavLink></li>
+        <li><NavLink to="/registrar">Register</NavLink></li>
         <li><NavLink to="/home">home</NavLink></li>
         <li><NavLink to="/get">Fetch Get</NavLink></li>
         <li><NavLink to="/post">Fetch Post</NavLink></li>
@@ -44,8 +46,9 @@ function App() {
         <Navigation />
         <Routes>
           <Route index element={<LogIn />} />
-          <Route path="/recover" element={<Recover />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/recuperacion" element={<Recover />} />
+          <Route path="/cambio-contrasena" element={<ChangePassword />} />
+          <Route path="/registrar" element={<Register />} />
           <Route element={<PrivateRoute roles={['Administrador', 'Profesor', 'ProSalud', 'Estudiante']} />}>
             <Route path="/home" element={<Home />} />
           </Route>

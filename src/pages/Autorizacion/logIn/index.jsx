@@ -4,7 +4,7 @@ import { AuthContext } from '../../../context/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Typography, Box} from '@mui/material';
 import Loading from '../../../components/loading';
-import './styles.css';
+import '../styles.css';
 
 const TOKEN_DURATION = 3600;
 
@@ -60,7 +60,7 @@ export default function LogIn() {
                 <Typography component="h1" variant="h5">
                     Iniciar sesión
                 </Typography>
-                <NavLink to="/register" className="link" >
+                <NavLink to="/registrar" className="link" >
                     Crea una cuenta
                 </NavLink>
                 <form className="form" onSubmit={handleSubmit}>
@@ -96,7 +96,7 @@ export default function LogIn() {
                         error={!!errors.password}
                         helperText={errors.password}
                     />
-                    <NavLink to="/recover" className="link" >
+                    <NavLink to="/recuperacion" className="link" >
                         ¿Olvidaste la contraseña?
                     </NavLink>
                     <Button
