@@ -4,7 +4,7 @@ import { AuthContext } from '../../../context/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Typography, Box} from '@mui/material';
 import Loading from '../../../components/loading';
-import '../styles.css';
+import '../auth.styles.css';
 
 const TOKEN_DURATION = 3600;
 

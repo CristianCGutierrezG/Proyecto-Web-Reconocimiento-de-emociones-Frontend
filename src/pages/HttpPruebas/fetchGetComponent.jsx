@@ -13,7 +13,7 @@ function DataFetchingComponent() {
     const { data, loading, error, sendRequest } = useHttp();
 
     useEffect(() => {
-        sendRequest('http://localhost:3001/api/v1/estudiantes', 'GET', null, headers);
+        sendRequest('http://localhost:3001/api/v1/estudiantes/1', 'GET', null, headers);
     }, [sendRequest, headers])
     
 

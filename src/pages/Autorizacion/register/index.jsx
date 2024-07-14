@@ -4,7 +4,7 @@ import useFormPost from '../../../hooks/useFormPost';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import Loading from '../../../components/loading.jsx';
 import Swal from 'sweetalert2';
-import '../styles.css';
+import '../auth.styles.css';
 
 const transformData = (formData) => {
     return {

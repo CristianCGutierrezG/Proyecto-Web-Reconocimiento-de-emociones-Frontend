@@ -21,7 +21,6 @@ const useFormPost = (initialValues, requiredFields, url, method = 'POST', header
         e.preventDefault();
         const validationErrors = validate(formData, requiredFields);
         setErrors(validationErrors);
-        console.log(Object.keys(validationErrors))
         if (Object.keys(validationErrors).length === 0) {
             if (authData && isTokenExpired()) {
                 alert('Session has expired. Please log in again.');

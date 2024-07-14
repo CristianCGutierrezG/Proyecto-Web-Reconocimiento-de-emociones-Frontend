@@ -5,13 +5,14 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [authData, setAuthData] = useState(() => {
         const savedAuthData = localStorage.getItem('authData');
-        return savedAuthData ? JSON.parse(savedAuthData) : null;
+        return savedAuthData ? JSON.parse(savedAuthData) : null; 
     });
 
     const [alertShown, setAlertShown] = useState(false);
 
     useEffect(() => {
-        if (authData) { //se podria comprobar si el token expiro para sacarla la informacion eel localstorage
+        if (authData) { 
+            //se podria comprobar si el token expiro para sacar la informacion del localstorage
             localStorage.setItem('authData', JSON.stringify(authData));
         } else {
             localStorage.removeItem('authData');
@@ -37,7 +38,7 @@ const AuthProvider = ({ children }) => {
             }
         };
 
-        const interval = setInterval(checkExpiration, 1000); // Check every second
+        const interval = setInterval(checkExpiration, 1000); //cada segundo
 
         return () => clearInterval(interval);
     }, [authData, alertShown]);
