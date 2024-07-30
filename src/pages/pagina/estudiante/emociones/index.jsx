@@ -1,5 +1,11 @@
+import Menu from '../../../../components/menu';
+import Horario from '../../../../components/horario';
+
 export default function Emociones() {
     return (
-        <h1>Emociones</h1>
+        <>
+            <Menu />
+            <Horario />
+        </>
     )
 }

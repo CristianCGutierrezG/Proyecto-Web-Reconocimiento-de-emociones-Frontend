@@ -1,7 +1,12 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import React from 'react';
+
+//Contextos
 import { AuthProvider } from '../../context/AuthContext.jsx';
 import { DatosPersonalesProvider } from '../../context/DatosPersonalesContext.jsx';
+import { InfoTokenEstudianteProvider } from '../../context/InfoTokenEstudianteContext';
+
+//Pages
 import LogIn from '../Autorizacion/logIn/index.jsx';
 import Recover from '../Autorizacion/recover/index.jsx';
 import ChangePassword from '../Autorizacion/changePassword/index.jsx';
@@ -61,10 +66,18 @@ function App() {
               <Route path="/materias/profesor" element={<MateriasProfesor />} />
             </Route>
             <Route element={<PrivateRoute roles={['Administrador', 'Estudiante', 'Profesional de salud']} redirectTo={"/home"} />}>
-              <Route path="/emociones/estudiante" element={<EmocionesEstudiante />} />
+              <Route path="/emociones/estudiante" element={
+                <InfoTokenEstudianteProvider>
+                  <EmocionesEstudiante />
+                </InfoTokenEstudianteProvider>
+              } />
             </Route>
             <Route element={<PrivateRoute roles={['Administrador', 'Estudiante']} redirectTo={"/home"} />}>
-              <Route path="/materias/estudiante" element={<MateriasEstudiante />} />
+              <Route path="/materias/estudiante" element={
+                <InfoTokenEstudianteProvider>
+                  <MateriasEstudiante />
+                </InfoTokenEstudianteProvider>
+              } />
               <Route path="/configuracion/estudiante" element={<ConfiguracionEstudiante />} />
             </Route>
             <Route element={<PrivateRoute roles={['Administrador', 'Profesional de salud']} redirectTo={"/home"} />}>
