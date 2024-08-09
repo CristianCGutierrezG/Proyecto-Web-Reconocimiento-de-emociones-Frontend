@@ -29,7 +29,7 @@ button{
 .link {
     text-decoration: none;
     margin-top: 8px;
-    color: var(--terniarycolor); 
+    color: var(--terniary-color);
     font-size: 14px;
 }
 

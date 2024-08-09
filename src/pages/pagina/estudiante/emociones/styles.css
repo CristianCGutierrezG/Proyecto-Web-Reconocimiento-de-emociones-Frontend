@@ -1,0 +1,100 @@
+/* styles.css */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.menu {
+  flex: 0 0 auto;
+  background-color: #f4f4f4;
+  padding: 10px;
+}
+
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 2fr 0.7fr;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.horario {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  background-color: var(--box-color);
+  height: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.sidebar {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.estudiante-info {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  padding: 8px;
+  align-items: center;
+  box-shadow: none;
+}
+
+.emotion, .materia {
+  background-color: var(--box-color);
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  flex: 1;
+}
+
+.comparison, .percentage {
+  background-color: var(--box-color);
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.comparison {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.percentage {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.comparison, .percentage {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background-color:var(--box-color);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color:var(--box-color);
+}

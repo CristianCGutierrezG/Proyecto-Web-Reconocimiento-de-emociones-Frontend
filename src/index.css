@@ -7,7 +7,10 @@
 :root {
     --primary-color: #d4ddff;
     --secondary-color: #677C99;
-    --terniarycolor: #9155E0;
+    --terniary-color: #9155E0;
+    --complementary-color: #ffff;
+    --border-color: #ddd;
+    --box-color: rgba(232, 232, 232, 0.25);
     --text-color: #3E3E3E;
     --textfield-bg-color: rgba(255, 255, 255, 0.2);
     --box-shadow-color: rgba(0, 0, 0, 0.1);

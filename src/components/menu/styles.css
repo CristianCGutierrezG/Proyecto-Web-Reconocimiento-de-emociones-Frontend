@@ -1,6 +1,6 @@
 
 .menu-container {
-    width: 250px;
+    width: 200px;
     background-color: #d4ddff;
     height: 100vh;
     padding-top: 20px;
@@ -11,8 +11,8 @@
 
 .menu-link {
     text-decoration: none;
-    color: inherit; 
-    
+    color: inherit;
+
 }
 
 .menu-link.active .MuiListItemIcon-root,
