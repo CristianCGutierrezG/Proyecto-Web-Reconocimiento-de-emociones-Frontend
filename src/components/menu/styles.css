@@ -1,9 +1,9 @@
 
 .menu-container {
+    /* position: sticky; */
     width: 200px;
-    background-color: #d4ddff;
+    background-color: var(--primary-color);
     height: 100vh;
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -17,13 +17,13 @@
 
 .menu-link.active .MuiListItemIcon-root,
 .menu-link.active .MuiListItem-root {
-    background-color: #677C99;
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--complementary-color);
 }
 
 .menu-divider {
     margin: 10px 0;
-    background-color: #9155E0;
+    background-color: var(--terniary-color);
 }
 
 .user-info {

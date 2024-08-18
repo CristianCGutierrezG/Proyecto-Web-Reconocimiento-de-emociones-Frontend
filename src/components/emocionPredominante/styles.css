@@ -1,0 +1,74 @@
+.emocion-container {
+  background-color: var(--box-color);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px var(--box-shadow-color);
+  margin-top: 16px;
+  border-top: 10px solid;
+}
+
+.emocion-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.emocion-text-container {
+  text-align: center;
+}
+
+.emocion-title {
+  align-self: center;
+  font-size: 2.25rem;
+  color: var(--terniary-color);
+  margin-bottom: 8px;
+}
+
+.emocion-value {
+  font-size: 2.25rem;
+  color: inherit;
+}
+
+.emocion-percentage {
+  font-size: 1.25rem;
+  color: var(--text-color);
+}
+
+.emocion-emoji img {
+  max-width: 100px;
+}
+
+.feliz {
+  color: var(--Feliz-textColor);
+  border-top-color: var(--Feliz-borderColor);
+}
+
+.triste {
+  color: var(--Triste-textColor);
+  border-top-color: var(--Triste-borderColor);
+}
+
+.enojado {
+  color: var(--Enojado-textColor);
+  border-top-color: var(--Enojado-borderColor);
+}
+
+.disgustado {
+  color: var(--Disgustado-textColor);
+  border-top-color: var(--Disgustado-borderColor);
+}
+.miedoso {
+  color: var(--Miedoso-textColor);
+  border-top-color: var(--Miedoso-borderColor);
+}
+.neutral {
+  color: var(--Neutral-textColor);
+  border-top-color: var(--Neutral-borderColor);
+}
+.sorprendido {
+  color: var(--Sorprendido-textColor);
+  border-top-color: var(--Sorprendido-borderColor);
+}

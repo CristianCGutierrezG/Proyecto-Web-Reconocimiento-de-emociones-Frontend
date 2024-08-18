@@ -1,0 +1,23 @@
+.grafico-container {
+  background-color: var(--box-color);
+  border-radius: 16px;
+  box-shadow: 0 2px 4px var(--box-shadow-color);
+  text-align: center;
+}
+
+.grafico-titulo {
+  color: var(--terniary-color);
+}
+
+.grafico-pie{
+  margin: auto;
+}
+.legend-item {
+  font-size: 14px;
+}
+
+
+element.style {
+  width: 80% !important;
+  height: 80% !important;
+}

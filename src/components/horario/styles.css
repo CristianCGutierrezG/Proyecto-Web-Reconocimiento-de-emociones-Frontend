@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px;
+  padding: 12px;
   font-family: Arial, sans-serif;
   overflow-x: auto;
 }
@@ -13,13 +13,14 @@
   align-items: center;
   width: 100%;
   margin-bottom: 16px;
-  color: var(--terniary-color)
+  color: var(--terniary-color);
 }
 
 .horario-container-sup {
   width: 100%;
   overflow-y: auto;
-  max-height: 53vh;
+  min-height: 30vh;
+  max-height: 46vh;
 }
 
 .horario-container {

@@ -1,21 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { format, startOfWeek, addWeeks, subWeeks, addDays } from "date-fns";
+import {
+  format,
+  startOfWeek,
+  addWeeks,
+  subWeeks,
+  addDays,
+} from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { es } from "date-fns/locale";
 import Emocion from "./emociones/index.jsx";
-import Materia from "./materias/index.jsx";
-import { InfoTokenEstudianteContext } from "../../context/InfoTokenEstudianteContext.jsx";
-import { InfoEstudianteIdContext } from "../../context/InfoEstudianteIdContext.jsx";
+import { EmocionesContext } from "../../context/EmocionesContext.jsx";
 import "./styles.css";
 
 const Horario = ({ estudianteId }) => {
-  const { emociones: contextEmociones, materias: contextMaterias } = useContext(InfoTokenEstudianteContext) || {};
-  const { emociones: estudianteEmociones, materias: estudianteMaterias, setEstudianteId } = useContext(InfoEstudianteIdContext) || {};
-
-  const [emociones, setEmociones] = useState([]);
-  const [materias, setMaterias] = useState([]);
+  const { emociones, setEstudianteId, setDateRange } = useContext(EmocionesContext) || {};
   const [currentWeek, setCurrentWeek] = useState(
     startOfWeek(new Date(), { weekStartsOn: 0, locale: es })
   );
@@ -23,19 +23,21 @@ const Horario = ({ estudianteId }) => {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   useEffect(() => {
+    // Establece el estudianteId en el contexto
     if (estudianteId) {
-      // Cargar datos del localStorage si existen
       setEstudianteId(estudianteId);
-      const storedEmociones = localStorage.getItem(`emociones`);
-      const storedMaterias = localStorage.getItem(`materias`);
-      if (storedEmociones) setEmociones(JSON.parse(storedEmociones));
-      if (storedMaterias) setMaterias(JSON.parse(storedMaterias));
-    } else {
-      // Usa el contexto si no hay estudianteId
-      setEmociones(contextEmociones || []);
-      setMaterias(contextMaterias || []);
     }
-  }, [estudianteId, contextEmociones, contextMaterias, estudianteEmociones, estudianteMaterias]);
+  }, [estudianteId, setEstudianteId]);
+
+  useEffect(() => {
+    // Cuando cambia la semana, actualiza el rango de fechas en el contexto
+    const startOfCurrentWeek = currentWeek.toISOString();
+    const endOfCurrentWeek = addDays(currentWeek, 7).toISOString();
+    setDateRange({
+      startDate: startOfCurrentWeek,
+      endDate: endOfCurrentWeek,
+    });
+  }, [currentWeek, setDateRange]);
 
   const handlePrevWeek = () => {
     setCurrentWeek(subWeeks(currentWeek, 1));
@@ -84,14 +86,6 @@ const Horario = ({ estudianteId }) => {
     return emocionPredominantePorHora;
   };
 
-  const getMateriasForDay = (day) => {
-    return materias.filter(
-      (materia) =>
-        format(new Date(materia.createdAt), "yyyy-MM-dd", { locale: es }) ===
-        format(day, "yyyy-MM-dd", { locale: es })
-    );
-  };
-
   const hours = [...Array(24)].map((_, i) => i);
 
   return (
@@ -132,6 +126,7 @@ const Horario = ({ estudianteId }) => {
                         <Emocion
                           key={emocionPredominante.emocion}
                           emocion={{ emocion: emocionPredominante.emocion }}
+                          hora={hour}
                         />
                       )}
                     </Box>

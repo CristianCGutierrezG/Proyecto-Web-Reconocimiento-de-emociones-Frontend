@@ -1,41 +1,35 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import Menu from '../../../../components/menu';
 import Horario from '../../../../components/horario';
+import EmocionPredominante from '../../../../components/emocionPredominante';
+import ListaDeMaterias from '../../../../components/listaMaterias';
+import GraficoEmocionesMensual from '../../../../components/porcentajeAparicion';
+import GraficoComparacionSemestral from '../../../../components/graficoComparacionSemestral';
+import EstudianteInfo from '../../../../components/estudianteInfo';
 import "./styles.css"
 
 export default function Emociones() {
+    const { estudianteId } = useParams();
+
     return (
         <div className='container'>
             <Menu />
             <div className='main'>
                 <div className='horario'>
-                    <Horario estudianteId={null}/>
+                    <Horario estudianteId={estudianteId || null}/>
                 </div>
                 <div className='sidebar'>
                     <div className='estudiante-info'>
-                        <h2>Chet Russel</h2>
-                        <p>9099608945</p>
+                      <EstudianteInfo estudianteId={estudianteId || null}/>
                     </div>
-                    <div className='emotion'>
-                        <h3>Emoción predominante</h3>
-                        <div className='emotion-details'>
-                            <span>Felicidad</span>
-                            <span>65%</span>
-                        </div>
-                    </div>
+                    <EmocionPredominante estudianteId={estudianteId || null}/>
                     <div className='materia'>
-                        <h3>Materias</h3>
-                        <p>Cálculo Diferencial</p>
-                        <p>Lunes 9 AM - 12 AM</p>
+                        <ListaDeMaterias estudianteId={estudianteId || null} allowColorCustomization={false}/>
                     </div>
                 </div>
-                <div className='comparison'>
-                    <h3>Comparación</h3>
-                    <div className='comparison-chart'></div>
-                </div>
-                <div className='percentage'>
-                    <h3>Porcentaje de aparición</h3>
-                    <div className='percentage-chart'></div>
-                </div>
+                <GraficoComparacionSemestral estudianteId={estudianteId || null} />
+                <GraficoEmocionesMensual estudianteId={estudianteId || null}/>
             </div>
         </div>
     );

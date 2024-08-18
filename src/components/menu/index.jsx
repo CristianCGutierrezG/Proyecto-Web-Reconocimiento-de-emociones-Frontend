@@ -47,7 +47,7 @@ export default function Menu() {
     const links = {
         "Profesor": {
             home: '/home',
-            emociones: '/emociones/profesor',
+            emociones: '/emociones/estudiante/6',
             materias: '/materias/profesor',
             contacto: '',
             ajustes: '/home',
@@ -68,8 +68,8 @@ export default function Menu() {
         },
     };
 
-    const selectedLinks = links[authData?.user.role] || links.Estudiante;
-    
+    const selectedLinks = links[authData?.user.role] || links.Profesor;
+
     return (
         <Box className="menu-container">
             <List>
@@ -91,7 +91,7 @@ export default function Menu() {
                 ))}
             </List>
             <Divider className="menu-divider" />
-            <Box 
+            <Box
                 className="user-info"
                 onMouseEnter={() => setShowLogout(true)}
                 onMouseLeave={() => setShowLogout(false)}

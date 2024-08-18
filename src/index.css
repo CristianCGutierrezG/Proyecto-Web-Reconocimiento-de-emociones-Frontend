@@ -14,4 +14,34 @@
     --text-color: #3E3E3E;
     --textfield-bg-color: rgba(255, 255, 255, 0.2);
     --box-shadow-color: rgba(0, 0, 0, 0.1);
+
+    /* Colores Emociones */
+    --Feliz-borderColor: #f8d823;
+    --Feliz-backgroundColor: rgba(248, 216, 35, 0.5);
+    --Feliz-textColor: #ffae00;
+
+    --Enojado-borderColor: #FB3837;
+    --Enojado-backgroundColor: rgba(251, 55, 55, 0.5);
+    --Enojado-textColor: #ff0000;
+
+    --Disgustado-borderColor: #A439E5;
+    --Disgustado-backgroundColor: rgba(164, 57, 229, 0.5);
+    --Disgustado-textColor: #9d00ff;
+
+    --Miedoso-borderColor: #00B17D;
+    --Miedoso-backgroundColor: rgba(0, 177, 124, 0.5);
+    --Miedoso-textColor: #00855d;
+
+    --Sorprendido-borderColor: #00C5F8;
+    --Sorprendido-backgroundColor: rgba(0, 197, 248, 0.5);
+    --Sorprendido-textColor: #0081a1;
+
+    --Triste-borderColor: #1E5593;
+    --Triste-backgroundColor: rgba(30, 85, 147, 0.5);
+    --Triste-textColor: #0059be;
+
+    --Neutral-borderColor:#585858 ;
+    --Neutral-backgroundColor: rgba(88, 88, 88, 0.5);
+    --Neutral-textColor: #1a1a1a;
+
 }

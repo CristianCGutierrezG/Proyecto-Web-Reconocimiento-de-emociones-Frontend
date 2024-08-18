@@ -4,8 +4,7 @@ import React from "react";
 //Contextos
 import { AuthProvider } from "../../context/AuthContext.jsx";
 import { DatosPersonalesProvider } from "../../context/DatosPersonalesContext.jsx";
-import { InfoTokenEstudianteProvider } from "../../context/InfoTokenEstudianteContext";
-import { InfoEstudianteIdProvider } from "../../context/InfoEstudianteIdContext";
+import { EmocionesProvider } from "../../context/EmocionesContext.jsx";
 
 //Pages
 import LogIn from "../Autorizacion/logIn/index.jsx";
@@ -79,7 +78,7 @@ function App() {
   return (
     <AuthProvider>
       <DatosPersonalesProvider>
-      <InfoEstudianteIdProvider>
+        <EmocionesProvider>
           <BrowserRouter>
             <Navigation />
             <Routes>
@@ -134,14 +133,8 @@ function App() {
                 }
               >
                 <Route
-                  path="/emociones/estudiante"
-                  element={
-                    <InfoEstudianteIdProvider>
-                    <InfoTokenEstudianteProvider>
-                      <EmocionesEstudiante />
-                    </InfoTokenEstudianteProvider>
-                    </InfoEstudianteIdProvider>
-                  }
+                  path="/emociones/estudiante/:estudianteId?"
+                  element={<EmocionesEstudiante />}
                 />
               </Route>
               <Route
@@ -154,11 +147,7 @@ function App() {
               >
                 <Route
                   path="/materias/estudiante"
-                  element={
-                    <InfoTokenEstudianteProvider>
-                      <MateriasEstudiante />
-                    </InfoTokenEstudianteProvider>
-                  }
+                  element={<MateriasEstudiante />}
                 />
                 <Route
                   path="/configuracion/estudiante"
@@ -180,7 +169,7 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
-          </InfoEstudianteIdProvider>
+        </EmocionesProvider>
       </DatosPersonalesProvider>
     </AuthProvider>
   );

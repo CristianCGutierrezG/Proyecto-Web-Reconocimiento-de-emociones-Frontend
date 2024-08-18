@@ -1,0 +1,29 @@
+.grafico-container {
+  padding: 10px;
+  background-color: var(--box-color);;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--box-shadow-color);
+}
+
+.grafico-titulo {
+  color: var(--terniary-color);
+  font-weight: bold;
+}
+
+.linea {
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+.linea.hidden {
+  opacity: 0.2;
+}
+
+.legend-item {
+  cursor: pointer;
+}
+
+.legend-item.inactive {
+  opacity: 0.5;
+  pointer-events: none;
+}

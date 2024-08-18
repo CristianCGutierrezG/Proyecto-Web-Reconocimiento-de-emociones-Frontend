@@ -32,8 +32,10 @@ body, html {
   grid-row: 1 / 2;
   background-color: var(--box-color);
   height: 100%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px var(--box-shadow-color);
   position: relative;
+  min-width: 540px;
+  border-radius: 8px;
 }
 
 .sidebar {
@@ -41,23 +43,25 @@ body, html {
   grid-row: 1 / 2;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .estudiante-info {
+  color: var(--terniary-color);
   display: flex;
   flex-direction: column;
   background-color: transparent;
-  padding: 8px;
+  padding: 3px;
   align-items: center;
   box-shadow: none;
 }
 
-.emotion, .materia {
+.materia {
   background-color: var(--box-color);
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   flex: 1;
+  border-radius: 8px;
 }
 
 .comparison, .percentage {
@@ -76,7 +80,7 @@ body, html {
   grid-row: 2 / 3;
 }
 
-.comparison, .percentage {
+.comparison {
   height: 100%;
   display: flex;
   align-items: center;
