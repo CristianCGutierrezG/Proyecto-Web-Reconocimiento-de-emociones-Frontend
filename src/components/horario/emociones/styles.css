@@ -12,8 +12,10 @@
 .hora {
   font-weight: bold;
   margin-bottom: 4px;
+  padding: 3px;
 }
 
 .texto-emocion {
   font-weight: normal;
+  padding: 3px;
 }

@@ -13,18 +13,18 @@ export default function Emociones() {
     const { estudianteId } = useParams();
 
     return (
-        <div className='container'>
+        <div className='emocionesPage-container'>
             <Menu />
-            <div className='main'>
-                <div className='horario'>
+            <div className='emocionesPage-main'>
+                <div className='emocionesPage-horario'>
                     <Horario estudianteId={estudianteId || null}/>
                 </div>
-                <div className='sidebar'>
-                    <div className='estudiante-info'>
+                <div className='emocionesPage-sidebar'>
+                    <div className='emocionesPage-estudiante-info'>
                       <EstudianteInfo estudianteId={estudianteId || null}/>
                     </div>
                     <EmocionPredominante estudianteId={estudianteId || null}/>
-                    <div className='materia'>
+                    <div className='emocionesPage-materia'>
                         <ListaDeMaterias estudianteId={estudianteId || null} allowColorCustomization={false}/>
                     </div>
                 </div>

@@ -1,0 +1,74 @@
+.popupMateria-header {
+  background-color: var(--primary-color); 
+  padding: 16px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  text-align: center;
+}
+
+.popupMateria-title {
+  font-size: 1.5rem;  
+  font-weight: bold;
+  margin: 0;
+}
+
+.popupMateria-group {
+  margin-top: 4px;
+  font-size: 1rem;
+  color: #666666; 
+}
+
+.popupMateria-content {
+  padding: 10px;
+}
+
+.popupMateria-docenteTitle {
+  font-weight: bold;
+  color: var(--terniary-color);
+  margin-top: 15px;
+}
+
+.popupMateria-docente {
+  font-weight: bold;
+}
+
+.popupMateria-horario {
+  font-weight: bold;
+  padding-top: 15px;
+  color: var(--terniary-color);
+}
+
+.popupMateria-divider {
+  margin: 15px 0;
+  background-color: var(--terniary-color);
+}
+
+.popupMateria-dia{
+  font-weight: bold;
+  color: var(--terniary-color);
+}
+
+.popupMateria-grid {
+  padding-top: 15px;
+}
+
+.popupMateria-actions {
+  justify-content: space-between !important; 
+}
+
+.popupMateria-error{
+  padding: 3px;
+  text-align: center;
+}
+
+.popupMateria-cancel {
+  color: var(--complementary-color) !important;
+  background-color: var(--warning-color) !important; 
+  border-radius: 8px;
+}
+
+.popupMateria-submit {
+  color: var(--complementary-color) !important;
+  background-color: var(--secondary-color) !important; 
+  border-radius: 8px;
+}

@@ -21,6 +21,20 @@
   overflow-y: auto;
   min-height: 30vh;
   max-height: 46vh;
+  padding-right: 10px;
+}
+
+.horario-container-sup::-webkit-scrollbar {
+  width: 8px;
+}
+
+.horario-container-sup::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 4px;
+}
+
+.horario-container-sup::-webkit-scrollbar-track {
+  background-color: var(--background-color);
 }
 
 .horario-container {

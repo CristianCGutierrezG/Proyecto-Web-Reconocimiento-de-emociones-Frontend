@@ -1,27 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 
-const MateriaCard = ({ materia, allowColorCustomization }) => {
+const MateriaCard = ({ materia, allowColorCustomization, onColorChange }) => {
     const { nombre, grupo, horarios, profesor, color } = materia;
-    const [selectedColor, setSelectedColor] = useState(color);  // Estado para manejar el color
+    const [selectedColor, setSelectedColor] = useState(color);
 
-    // Procesa los horarios y únelos con saltos de línea.
+    useEffect(() => {
+        setSelectedColor(color);
+    }, [color]);
+
     const horarioTexto = horarios.map(horario => (
         `${horario.dia} ${horario.horaInicio} - ${horario.horaFin}`
-    )).join('\n');  // Usamos \n para hacer el salto de línea
+    )).join('\n');
 
-    // Estilo del borde basado en el color seleccionado
     const cardStyle = {
         border: `2px solid ${selectedColor}`,
         borderTop: `10px solid ${selectedColor}`,
         borderRadius: '8px',
         padding: '8px',
-        backgroundColor: '#F5F5F5',  // Fondo neutro
+        backgroundColor: '#F5F5F5',
     };
 
-    // Manejador del cambio de color
     const handleColorChange = (event) => {
-        setSelectedColor(event.target.value);
+        const newColor = event.target.value;
+        setSelectedColor(newColor);
+        onColorChange(materia.id, newColor);
+
+        // Actualiza el localStorage inmediatamente
+        const savedColors = JSON.parse(localStorage.getItem('materiasColors')) || {};
+        localStorage.setItem(
+            'materiasColors',
+            JSON.stringify({
+                ...savedColors,
+                [materia.id]: newColor,
+            })
+        );
     };
 
     return (

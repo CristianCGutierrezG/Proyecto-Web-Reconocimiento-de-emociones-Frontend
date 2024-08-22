@@ -1,0 +1,15 @@
+
+  .search-bar-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .tarjetas-container {
+    margin-top: 20px;
+  }
+  
