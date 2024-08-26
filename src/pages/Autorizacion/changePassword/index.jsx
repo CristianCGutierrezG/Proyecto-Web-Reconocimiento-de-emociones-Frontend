@@ -44,7 +44,6 @@ export default function ChangePassword() {
 
     useEffect(() => {
         if (data) {
-            console.log(data)
             Swal.fire({
                 title: 'Contraseña actualizada',
                 text: 'Tu nueva contraseña se actualizó con éxito',
@@ -57,7 +56,7 @@ export default function ChangePassword() {
     }, [data, navigate]);
 
     return (
-        <Container component="main" maxWidth="sm">
+        <Container component="main" maxWidth="sm" className='container'>
             <Box className="root">
                 <Typography component="h1" variant="h5">
                     Recuperar contraseña

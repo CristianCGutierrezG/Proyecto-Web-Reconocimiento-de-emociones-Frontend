@@ -54,6 +54,7 @@
 
 .popupMateria-actions {
   justify-content: space-between !important; 
+  padding: 0 15px !important;
 }
 
 .popupMateria-error{

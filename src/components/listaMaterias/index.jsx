@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@mui/material';
-import MateriaCard from './MateriaCard';
+import MateriaCard from './materiaCard';
 import useFetchMaterias from '../../hooks/useFetchMaterias';
 import './styles.css';
 
@@ -24,9 +24,6 @@ const ListaDeMaterias = ({ estudianteId, allowColorCustomization = false }) => {
       materia.id === materiaId ? { ...materia, color } : materia
     );
     setMateriasConColor(updatedMaterias);
-
-    // No es necesario guardar en localStorage aquí
-    // Se hará en MateriaCard cuando cambie el color
   };
 
   const generarColorAleatorio = () => {

@@ -47,7 +47,7 @@ function PopupMateria({ materia, onClose }) {
             icon: 'success',
             confirmButtonText: 'Aceptar'
         }).then(() => {
-            window.location.reload();  // Recarga la página después de la inscripción exitosa
+            window.location.reload();  
         });
     }
   }, [data, materia.nombre]);

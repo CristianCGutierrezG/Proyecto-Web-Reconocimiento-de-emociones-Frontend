@@ -15,7 +15,6 @@ function ObjectEditor() {
             ...prevData,
             [name]: value,
         }));
-        console.log(formData)
     };
 
     const handleSubmit = async (e) => {

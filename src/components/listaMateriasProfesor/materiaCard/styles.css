@@ -1,0 +1,18 @@
+.materiaCard {
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid var(--secondary-color);
+    border-top: 10px solid var(--secondary-color);
+    padding: 8px;
+}
+
+.materiaCard:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.materiaCard-content {
+    padding: 0px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

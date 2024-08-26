@@ -47,7 +47,7 @@ export default function Menu() {
     const links = {
         "Profesor": {
             home: '/home',
-            emociones: '/emociones/estudiante/6',
+            emociones: '/emociones/profesor',
             materias: '/materias/profesor',
             contacto: '',
             ajustes: '/home',

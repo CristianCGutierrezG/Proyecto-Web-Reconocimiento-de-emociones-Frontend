@@ -4,6 +4,13 @@ button{
     border-radius: 8px !important;
 }
 
+.container{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 .root {
     display: flex;
     flex-direction: column;
@@ -12,12 +19,14 @@ button{
     color: var(--text-color);
     padding: 32px;
     border-radius: 15px;
+    width: 100%;
     box-shadow: 0px 4px 20px var(--box-shadow-color);
 }
 
 .form {
     width: 100%;
     margin-top: 8px;
+    padding: auto;
 }
 
 .formSection{

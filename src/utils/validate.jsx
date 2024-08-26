@@ -1,6 +1,44 @@
 export const validate = (formData, requiredFields = {}) => {
     const errors = {};
 
+    // Validación de campos obligatorios
+    if (requiredFields.materia && !formData.materia) {
+        errors.materia = "Materia es requerida";
+    }
+
+    if (requiredFields.grupo && !formData.grupo) {
+        errors.grupo = "Grupo es requerido";
+    }
+
+    if (requiredFields.horarios) {
+        if (!formData.horarios || formData.horarios.length === 0) {
+            errors.horarios = "Debe agregar al menos un horario";
+        } else {
+            formData.horarios.forEach((horario, index) => {
+                if (!horario.dia) {
+                    errors.dia = "Día es requerido";
+                }
+                if (!horario.horaInicio) {
+                    errors.horaInicio = "Hora de inicio es requerida";
+                }
+                if (!horario.horaFin) {
+                    errors.horaFin = "Hora de fin es requerida";
+                }
+
+                // Verificación de que horaInicio debe ser menor que horaFin
+                if (horario.horaInicio && horario.horaFin) {
+                    const [horaInicioH, horaInicioM] = horario.horaInicio.split(':').map(Number);
+                    const [horaFinH, horaFinM] = horario.horaFin.split(':').map(Number);
+
+                    if (horaInicioH > horaFinH || (horaInicioH === horaFinH && horaInicioM >= horaFinM)) {
+                        errors.horaFin = "La hora de fin debe ser mayor que la hora de inicio";
+                    }
+                }
+            });
+        }
+    }
+
+    // Otras validaciones existentes
     if (requiredFields.nombres && !formData.nombres) {
         errors.nombres = "Nombre es requerido";
     }
@@ -36,7 +74,7 @@ export const validate = (formData, requiredFields = {}) => {
             errors.password = "La contraseña debe tener al menos 8 caracteres";
         }
     }
-    
+
     if (requiredFields.confirmPassword) {
         if (!formData.confirmPassword) {
             errors.confirmPassword = "Confirmar contraseña es requerido";

@@ -35,11 +35,17 @@ const useFormPost = (initialValues, requiredFields, url, method = 'POST', header
         }
     };
 
+    const resetForm = () => {
+        setFormData(initialValues);
+        setErrors({}); 
+    };
+
     return {
         formData,
         errors,
         handleChange,
         handleSubmit,
+        resetForm, 
         data,
         loading,
         error,

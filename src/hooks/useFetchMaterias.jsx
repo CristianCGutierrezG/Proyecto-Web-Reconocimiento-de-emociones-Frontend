@@ -26,6 +26,8 @@ const useFetchMaterias = (estudianteId) => {
           materiasUrl = `http://localhost:3001/api/v1/estudiantes/${estudianteId}/materias`;
         } else if (authData.user?.role === "Estudiante") {
           materiasUrl = `http://localhost:3001/api/v1/profile/estudiante-materias`;
+        } else if (authData.user?.role === "Profesor") {
+          materiasUrl = `http://localhost:3001/api/v1/profile/profesor-materias`;
         }
 
         if (materiasUrl) {

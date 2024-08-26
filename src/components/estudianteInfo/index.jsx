@@ -26,7 +26,6 @@ function EstudianteInfo({ estudianteId }) {
                 const url = `http://localhost:3001/api/v1/estudiantes/${estudianteId}`;
                 fetchEstudiante(url, 'GET', null, headers);
             } else {
-                // Usar los datos del contexto si no hay estudianteId o si el token ha expirado
                 setEstudiante(datosPersonales);
             }
         };

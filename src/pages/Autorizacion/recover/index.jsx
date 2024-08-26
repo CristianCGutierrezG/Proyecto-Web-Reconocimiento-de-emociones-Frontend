@@ -31,7 +31,6 @@ export default function Recover() {
 
     useEffect(() => {
         if (data) {
-            console.log(data)
             Swal.fire({
                 title: 'Correo enviado',
                 text: 'Se a enviado un correo con las instrucciones para realizar el cambio de contraseña',
@@ -44,7 +43,7 @@ export default function Recover() {
     }, [data, navigate]);
 
     return (
-        <Container component="main" maxWidth="sm">
+        <Container component="main" maxWidth="sm" className='container'>
             <Box className="root">
                 <Typography component="h1" variant="h5">
                     Recuperar contraseña

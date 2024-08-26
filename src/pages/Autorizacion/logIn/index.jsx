@@ -55,7 +55,7 @@ export default function LogIn() {
     }, [error]);
 
     return (
-        <Container component="main" maxWidth="sm">
+        <Container component="main" maxWidth="sm" className='container'>
             <Box className="root">
                 <Typography component="h1" variant="h5">
                     Iniciar sesión

@@ -69,7 +69,7 @@ export default function Register() {
     }, [data, navigate]);
 
     return (
-        <Container component="main" maxWidth="md">
+        <Container component="main" maxWidth="md" className='container'>
             <Box className="root">
                 <Typography component="h1" variant="h5">
                     Crea tu cuenta gratis

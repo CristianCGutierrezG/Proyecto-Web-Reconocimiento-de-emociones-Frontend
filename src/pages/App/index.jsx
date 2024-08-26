@@ -22,65 +22,12 @@ import ConfiguracionEstudiante from "../pagina/estudiante/configuracion/index.js
 import EmocionesProSalud from "../pagina/proSalud/emociones/index.jsx";
 import PrivateRoute from "../../components/privateRoute.jsx";
 
-const Navigation = () => {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/" end>
-            Log in
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/recuperacion">Recover Password</NavLink>
-        </li>
-        <li>
-          <NavLink to="/cambio-contrasena">Cambiar Password</NavLink>
-        </li>
-        <li>
-          <NavLink to="/registrar">Register</NavLink>
-        </li>
-        <li>
-          <NavLink to="/home">home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/get">Fetch Get</NavLink>
-        </li>
-        <li>
-          <NavLink to="/post">Fetch Post</NavLink>
-        </li>
-        <li>
-          <NavLink to="/emociones/profesor">Emociones Profesor</NavLink>
-        </li>
-        <li>
-          <NavLink to="/materias/profesor">Materias Profesor</NavLink>
-        </li>
-        <li>
-          <NavLink to="/emociones/estudiante">Emociones Estudiante</NavLink>
-        </li>
-        <li>
-          <NavLink to="/materias/estudiante">Materias Estudiante</NavLink>
-        </li>
-        <li>
-          <NavLink to="/configuracion/estudiante">
-            Configuración Estudiante
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/emociones/proSalud">Emociones ProSalud</NavLink>
-        </li>
-      </ul>
-    </nav>
-  );
-};
-
 function App() {
   return (
     <AuthProvider>
       <DatosPersonalesProvider>
         <EmocionesProvider>
           <BrowserRouter>
-            <Navigation />
             <Routes>
               <Route index element={<LogIn />} />
               <Route path="/recuperacion" element={<Recover />} />

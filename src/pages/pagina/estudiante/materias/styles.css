@@ -54,15 +54,14 @@ body, html {
   
   .materiasPage-materia {
     overflow: hidden;
-    height: 445px;
-    max-height: 445px;
+    max-height: 508px;
     background-color: var(--box-color);
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     flex: 1;
     border-radius: 8px;
-    max-height: 460px;
     overflow: hidden;
+    width: 100%;
   }
   
   .materiasPage-Buscador {
