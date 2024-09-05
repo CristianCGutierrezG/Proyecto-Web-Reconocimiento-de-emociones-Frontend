@@ -3,7 +3,7 @@ import { Grid } from '@mui/material';
 import useFetchMaterias from '../../hooks/useFetchMaterias';
 import MateriaCard from './materiaCard';
 
-const ListaMateriasProfesor = ({ baseUrl}) => {
+const ListaMateriasProfesor = ({ baseUrl }) => {
     const materias = useFetchMaterias(null);
 
     const handleCardClick = (materia) => {

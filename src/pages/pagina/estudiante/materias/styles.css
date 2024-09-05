@@ -54,7 +54,7 @@ body, html {
   
   .materiasPage-materia {
     overflow: hidden;
-    max-height: 508px;
+    max-height: 465px;
     background-color: var(--box-color);
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);

@@ -5,6 +5,7 @@ import React from "react";
 import { AuthProvider } from "../../context/AuthContext.jsx";
 import { DatosPersonalesProvider } from "../../context/DatosPersonalesContext.jsx";
 import { EmocionesProvider } from "../../context/EmocionesContext.jsx";
+import { EmocionesPorMateriaProvider } from "../../context/EmocionesPorMateriaContext.jsx";
 
 //Pages
 import LogIn from "../Autorizacion/logIn/index.jsx";
@@ -12,8 +13,6 @@ import Recover from "../Autorizacion/recover/index.jsx";
 import ChangePassword from "../Autorizacion/changePassword/index.jsx";
 import Register from "../Autorizacion/register/index.jsx";
 import Home from "../pagina/home/index.jsx";
-import FetchGetComponent from "../HttpPruebas/fetchGetComponent.jsx";
-import FetchPostComponent from "../HttpPruebas/fetchPostComponent.jsx";
 import EmocionesProfesor from "../pagina/profesor/emociones/index.jsx";
 import MateriasProfesor from "../pagina/profesor/materias/index.jsx";
 import EmocionesEstudiante from "../pagina/estudiante/emociones/index.jsx";
@@ -21,12 +20,15 @@ import MateriasEstudiante from "../pagina/estudiante/materias/index.jsx";
 import ConfiguracionEstudiante from "../pagina/estudiante/configuracion/index.jsx";
 import EmocionesProSalud from "../pagina/proSalud/emociones/index.jsx";
 import PrivateRoute from "../../components/privateRoute.jsx";
+import EstudiantePorMateria from "../pagina/profesor/estudiantePorMateria/index.jsx";
+import EmocionesPorMateria from "../pagina/profesor/emocionPorMateria/index.jsx";
 
 function App() {
   return (
     <AuthProvider>
       <DatosPersonalesProvider>
         <EmocionesProvider>
+         <EmocionesPorMateriaProvider>
           <BrowserRouter>
             <Routes>
               <Route index element={<LogIn />} />
@@ -47,8 +49,6 @@ function App() {
               >
                 <Route path="/home" element={<Home />} />
               </Route>
-              <Route path="/get" element={<FetchGetComponent />} />
-              <Route path="/post" element={<FetchPostComponent />} />
               <Route
                 element={
                   <PrivateRoute
@@ -62,8 +62,16 @@ function App() {
                   element={<EmocionesProfesor />}
                 />
                 <Route
+                  path="/materiasEmocion/:materiaId?"
+                  element={<EmocionesPorMateria />}
+                />
+                <Route
                   path="/materias/profesor"
                   element={<MateriasProfesor />}
+                />
+                <Route
+                  path="/materiasEstudiante/:materiaId?"
+                  element={<EstudiantePorMateria />}
                 />
               </Route>
               <Route
@@ -116,6 +124,7 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
+          </EmocionesPorMateriaProvider>
         </EmocionesProvider>
       </DatosPersonalesProvider>
     </AuthProvider>

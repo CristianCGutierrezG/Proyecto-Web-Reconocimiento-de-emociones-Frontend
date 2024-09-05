@@ -1,0 +1,83 @@
+.listaEstudiantes-title {
+    font-weight: bold;
+    color: var(--terniary-color);
+    font-size: 1.5rem !important;
+}
+
+.listaEstudiantes-divider {
+    margin-bottom: 10px !important;
+    background-color: var(--terniary-color);
+
+}
+
+.table-container {
+    margin-bottom: 10px;
+    max-height: 625px;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.header-cell {
+    background-color: var(--primary-color);
+    font-weight: bold !important;
+    color: var(--complementary-color) !important;
+    text-align: center !important;
+    font-size: 1.1em !important;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-bottom: 2px solid var(--secondary-color) !important;
+}
+
+.table td {
+    background-color: var(--box-color);
+    border-bottom: 1px solid var(--secondary-color);
+    color: var(--text-color);
+    align-items: center;
+    padding: 0 !important;
+    text-align: center;
+    font-size: 1.1em !important;
+}
+
+.table-row:hover {
+    background-color: #ECDDF9;
+}
+
+.table-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4F3C75;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 5px;
+}
+
+.table-cell {
+    display: flex;
+    align-items: center;
+}
+
+.table-cell img.avatar {
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}

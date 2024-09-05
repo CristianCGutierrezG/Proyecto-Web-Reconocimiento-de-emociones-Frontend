@@ -1,0 +1,24 @@
+.lista-estudiantes-container {
+    position: relative;
+}
+
+.listaEstudiantes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-icon {
+    color: white;
+    background-color: #50C878;
+    border-radius: 50%;
+}
+.remove-icon {
+    color: white;
+    background-color: #FF5C5C;
+    border-radius: 50%;
+}
+.listaEstudiantes-title {
+    font-weight: bold;
+    color: var(--terniary-color);
+    font-size: 1.5rem !important;
+}

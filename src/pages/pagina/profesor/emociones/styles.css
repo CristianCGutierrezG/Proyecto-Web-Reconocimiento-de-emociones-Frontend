@@ -1,34 +1,41 @@
-body,
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.emocionesProfesorPage-container {
+.profesorPage-container {
     display: flex;
     height: 100vh;
 }
 
-.emocionesProfesorPage-main {
+.profesorPage-main {
     display: flex;
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
-    width: 100%;
+    overflow-y: auto; 
+    max-height: 100%;
 }
 
-.emocionesProfesorPage-materia {
+.profesorPage-materia {
     background-color: var(--box-color);
-    padding: 20px 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex: 1;
+    padding: 20px;
     border-radius: 8px;
-    overflow: hidden;
+    overflow-y: auto; 
+    max-height: calc(100vh - 80px);
 }
 
-.emocionesProfesorPage-title {
+.profesorPage-materia::-webkit-scrollbar {
+    width: 8px;
+}
+
+.profesorPage-materia::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.profesorPage-materia::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+}
+
+.profesorPage-title {
     color: var(--terniary-color);
     display: flex;
     justify-content: space-between;
@@ -37,4 +44,5 @@ html {
     text-align: center;
     box-shadow: none;
     padding: 0 20px;
-  }
+}
+

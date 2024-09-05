@@ -1,0 +1,41 @@
+.profesorPage-mainMateriaEstudiante {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+.profesorPage-materiaEstudianteInterior {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.profesorPage-subTitle {
+    font-weight: bold;
+    color: var(--terniary-color);
+    font-size: 1.5rem !important;
+}
+
+.profesorPage-divider {
+    margin-bottom: 10px !important;
+    background-color: var(--terniary-color);
+
+}
+
+.profesorPage-dia {
+    font-weight: bold;
+    font-size: 1.3rem !important;
+    color: var(--terniary-color);
+}
+
+.profesorPage-grid {
+    padding-top: 15px;
+    padding-left: 60px;
+}
+
+.profesorPage-hora {
+    font-size: 1.3rem !important;
+}

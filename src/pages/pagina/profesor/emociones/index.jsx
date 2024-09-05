@@ -5,18 +5,18 @@ import { Typography } from '@mui/material';
 import "./styles.css"
 
 export default function Emociones() {
-    const baseUrl = '/materias'; 
+    const baseUrl = '/materiasEmocion'; 
 
     return (
-        <div className='emocionesProfesorPage-container'>
+        <div className='profesorPage-container'>
             <Menu />
-            <div className='emocionesProfesorPage-main'>
-                <div className="emocionesProfesorPage-title">
+            <div className='profesorPage-main'>
+                <div className="profesorPage-title">
                     <Typography variant="h4" component="h1" gutterBottom>
                         Estudiantes por materia
                     </Typography>
                 </div>
-                <div className='emocionesProfesorPage-materia'>
+                <div className='profesorPage-materia'>
                     <ListaMateriasProfesor baseUrl={baseUrl} />
                 </div>
             </div>
