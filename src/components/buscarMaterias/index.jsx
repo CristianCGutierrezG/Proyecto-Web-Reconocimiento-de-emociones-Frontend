@@ -10,8 +10,12 @@ import './styles.css';
 function BuscarMaterias() {
   const [busqueda, setBusqueda] = useState('');
   const [selectedMateria, setSelectedMateria] = useState(null);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const { authData, isTokenExpired, logout } = useContext(AuthContext);
+  const { data: materias, loading, sendRequest } = useHttp();
+
+  const limit = 6; 
+  const offset = (page - 1) * limit;
   
   const headers = useMemo(() => {
     if (authData && authData.token) {
@@ -23,17 +27,13 @@ function BuscarMaterias() {
     return {};
   }, [authData]);
 
-  const { data: materias, loading, sendRequest } = useHttp();
 
-  const limit = 6; // Limitar a 20 resultados por página
-  const offset = (page - 1) * limit;
 
   useEffect(() => {
     if (busqueda.trim() !== '') {
       const materiasUrl = `http://localhost:3001/api/v1/materias/buscar/${busqueda}?limit=${limit}&offset=${offset}`;
       
       if (authData && isTokenExpired()) {
-        alert('Session has expired. Please log in again.');
         logout();
       } else {
         sendRequest(materiasUrl, 'GET', null, headers);
@@ -65,7 +65,7 @@ function BuscarMaterias() {
         />
         <IconButton 
           color="primary" 
-          onClick={() => setPage(1)} // Reiniciar a la primera página al hacer una nueva búsqueda
+          onClick={() => setPage(1)} 
           aria-label="search"
         >
           <SearchIcon />
@@ -82,7 +82,7 @@ function BuscarMaterias() {
 
       {materias && materias.length > 0 && (
         <Pagination
-          count={Math.ceil(materias.totalCount / limit)} // Assuming `materias.totalCount` holds the total number of results
+          count={Math.ceil(materias.totalCount / limit)} 
           page={page}
           onChange={handlePageChange}
           color="primary"

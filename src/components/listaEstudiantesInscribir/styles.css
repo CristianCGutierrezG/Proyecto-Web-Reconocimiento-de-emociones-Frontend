@@ -1,4 +1,4 @@
-.lista-estudiantes-container {
+.listaEstudiantes-container {
     position: relative;
 }
 
@@ -7,18 +7,28 @@
     justify-content: space-between;
     align-items: center;
 }
-.add-icon {
-    color: white;
-    background-color: #50C878;
-    border-radius: 50%;
-}
-.remove-icon {
-    color: white;
-    background-color: #FF5C5C;
-    border-radius: 50%;
-}
+
 .listaEstudiantes-title {
     font-weight: bold;
     color: var(--terniary-color);
     font-size: 1.5rem !important;
 }
+
+.listaEstudiantes-cancel {
+    color: var(--complementary-color) !important;
+    background-color: var(--warning-color) !important;
+    border-radius: 8px;
+}
+
+.listaEstudiantes-submit {
+    color: var(--complementary-color) !important;
+    background-color: var(--success-color) !important;
+    border-radius: 8px;
+}
+
+.tableInscripcion-container {
+    max-height: 380px;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+

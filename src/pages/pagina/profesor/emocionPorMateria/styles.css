@@ -37,9 +37,25 @@
 
 .profesorPage-graficos{
     width: 100%;
-    justify-content: center; 
-    gap: 15px;
     margin-right: 20px; 
+}
+
+
+.profesorPage-buttons {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.profesorPage-cancel {
+    color: var(--complementary-color) !important;
+    background-color: var(--warning-color) !important;
+    border-radius: 8px;
+}
+
+.profesorPage-edit {
+    color: var(--complementary-color) !important;
+    background-color: var(--secondary-color) !important;
+    border-radius: 8px;
 }

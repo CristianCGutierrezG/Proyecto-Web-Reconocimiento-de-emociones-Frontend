@@ -17,9 +17,9 @@ import {
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import Swal from 'sweetalert2';
-import useFormPost from '../../../hooks/useFormPost';
-import { AuthContext } from '../../../context/AuthContext';
-import './styles.css'; // Importando el archivo de estilos
+import useFormPost from '../../hooks/useFormPost';
+import { AuthContext } from '../../context/AuthContext';
+import './styles.css';
 
 const transformData = (formData) => {
     const horarios = formData.horarios.map(horario => ({
@@ -35,7 +35,7 @@ const transformData = (formData) => {
     };
 };
 
-export default function NuevaMateriaDialog({ open, onClose }) {
+export default function EditarMateriaDialog({ open, onClose, materiaData }) {
     const { authData } = useContext(AuthContext);
 
     const headers = useMemo(() => {
@@ -49,9 +49,9 @@ export default function NuevaMateriaDialog({ open, onClose }) {
     }, [authData]);
 
     const initialValues = {
-        materia: '',
-        grupo: '',
-        horarios: [{ dia: '', horaInicio: '', horaFin: '' }]
+        materia: materiaData?.nombre || '',
+        grupo: materiaData?.grupo || '',
+        horarios: materiaData?.horarios || [{ dia: '', horaInicio: '', horaFin: '' }]
     };
 
     const requiredFields = {
@@ -61,7 +61,7 @@ export default function NuevaMateriaDialog({ open, onClose }) {
     };
 
     const [customError, setCustomError] = useState(null);
-    const [isDirty, setIsDirty] = useState(false); 
+    const [isDirty, setIsDirty] = useState(false);
 
     const {
         formData,
@@ -72,12 +72,12 @@ export default function NuevaMateriaDialog({ open, onClose }) {
         loading,
         error,
         errorResponse,
-        resetForm 
+        resetForm
     } = useFormPost(
         initialValues,
         requiredFields,
-        'http://localhost:3001/api/v1/materias/token',
-        'POST',
+        `http://localhost:3001/api/v1/materias/${materiaData.id}`,
+        'PATCH',
         headers,
         (formData) => transformData(formData)
     );
@@ -86,8 +86,8 @@ export default function NuevaMateriaDialog({ open, onClose }) {
         if (data) {
             onClose();
             Swal.fire({
-                title: 'Materia creada',
-                text: 'La nueva materia ha sido creada exitosamente.',
+                title: 'Materia actualizada',
+                text: 'La materia ha sido actualizada exitosamente.',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             }).then((result) => {
@@ -142,7 +142,7 @@ export default function NuevaMateriaDialog({ open, onClose }) {
         if (isDirty) {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: 'Estás a punto de cancelar la creación. ¿Deseas continuar?',
+                text: 'Estás a punto de cancelar los cambios. ¿Deseas continuar?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Sí, cancelar',
@@ -161,7 +161,7 @@ export default function NuevaMateriaDialog({ open, onClose }) {
 
     return (
         <Dialog open={open} onClose={handleCancel} fullWidth maxWidth="sm">
-            <DialogTitle className="crearMateria-title">Nueva materia</DialogTitle>
+            <DialogTitle className="crearMateria-title">Editar materia</DialogTitle>
             <DialogContent>
                 <TextField
                     variant="outlined"
@@ -259,7 +259,7 @@ export default function NuevaMateriaDialog({ open, onClose }) {
                             helperText={errors.horaInicio}
                             className="crearMateria-textfield"
                             inputProps={{
-                                step: 3600, 
+                                step: 3600,
                                 min: "00:00",
                                 max: "23:59",
                             }}
@@ -296,22 +296,33 @@ export default function NuevaMateriaDialog({ open, onClose }) {
                                 max: "23:59",
                             }}
                         />
-                        <Button onClick={() => handleRemoveHorario(index)} className="crearMateria-remove"> <RemoveIcon/> </Button>
+                        <Button
+                            className="crearMateria-remove"
+                            onClick={() => handleRemoveHorario(index)}
+                            disabled={formData.horarios.length <= 1}
+                        >
+                        <RemoveIcon />
+                        </Button>
                     </Box>
                 ))}
-                <Button onClick={handleAddHorario} className="crearMateria-add">
-                <AddIcon/>
+                <Button
+                    className="crearMateria-add"
+                    onClick={handleAddHorario}
+                    disabled={formData.horarios.length >= 4}
+                >
+                    <AddIcon />
                 </Button>
             </DialogContent>
-            <DialogActions  className="crearMateria-actions">
+            {customError && <div className="crearMateria-alert">Error: {customError} </div>}
+            <DialogActions className="crearMateria-actions">
                 <Button onClick={handleCancel} className="crearMateria-cancel">
                     Cancelar
                 </Button>
-                <Button onClick={handleSubmit}  className="crearMateria-submit" variant="contained">
-                    Crear
+                <Button onClick={handleSubmit}  className="crearMateria-submit"  disabled={loading}>
+                    Actualizar
                 </Button>
             </DialogActions>
-            {customError && <div className="crearMateria-alert">Error: {customError} </div>}
+            
         </Dialog>
     );
 }

@@ -17,7 +17,7 @@ export default function ListaEstudiante({ inscritos }) {
                 Estudiantes
             </Typography>
             <Divider className="listaEstudiantes-divider" />
-            <TableContainer component={Paper} className="table-container">
+            <TableContainer component={Paper} className="tableEmociones-container">
                 <Table className="table">
                     <TableHead>
                         <TableRow>

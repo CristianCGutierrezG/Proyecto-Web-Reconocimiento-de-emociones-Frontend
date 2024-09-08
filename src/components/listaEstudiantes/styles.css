@@ -10,9 +10,9 @@
 
 }
 
-.table-container {
+.tableEmociones-container {
     margin-bottom: 10px;
-    max-height: 625px;
+    max-height: 700px;
     overflow-y: auto;
     border-radius: 8px;
 }

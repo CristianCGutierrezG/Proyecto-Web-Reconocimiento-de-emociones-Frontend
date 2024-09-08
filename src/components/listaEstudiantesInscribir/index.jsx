@@ -1,44 +1,93 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Typography, Divider, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from '@mui/material';
+import React, { useState, useMemo, useContext, useEffect } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Typography, Divider } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import "./styles.css";
+import InscribirEstudianteDialog from './inscribirEstudianteDialog';
+import Swal from 'sweetalert2';
+import useHttp from '../../hooks/useHttp';
+import { AuthContext } from '../../context/AuthContext';
+import './styles.css';
 
-export default function ListaEstudianteInscribir({ inscritos }) {
-    const navigate = useNavigate();
+export default function ListaEstudianteInscribir({ inscritos, estudiantes, materiaId }) {
     const [open, setOpen] = useState(false);
+    const { authData } = useContext(AuthContext);
+    const { data, sendRequest: deleteRequest, errorResponse, error } = useHttp();
 
-    const handleEmocionClick = (estudianteId) => {
-        navigate(`/emociones/estudiante/${estudianteId}`);
-    };
+    const headers = useMemo(() => {
+        if (authData && authData.token) {
+            return {
+                'Authorization': `Bearer ${authData.token}`,
+                'api': 'PEJC2024',
+            };
+        }
+        return {};
+    }, [authData]);
 
     const handleAddClick = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
+    const onClose = () => {
         setOpen(false);
     };
 
-    const handleRemoveClick = (estudianteId) => {
-        // Aquí agregas la lógica para desinscribir un estudiante
+    const handleRemoveClick = async (estudianteId) => {
+        const result = await Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción! El estudiante quedara elimado de la materia",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+        });
+
+        if (result.isConfirmed) {
+
+            const url = `http://localhost:3001/api/v1/materias/remove-inscripcion`;
+            const body = {
+                materiaId: materiaId,
+                estudianteId: estudianteId
+            };
+
+            try {
+                await deleteRequest(url, 'PATCH', body, headers);
+            } catch (err) {
+                Swal.fire('Error', 'Hubo un problema al eliminar al estudiante.', 'error');
+            }
+        }
     };
 
-    
+
+    useEffect(() => {
+        if (data) {
+            Swal.fire({
+                title: '¡Eliminado!',
+                text: 'El estudiante ha sido eliminado.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+            }).then(() => {
+                window.location.reload();
+            });
+        }
+        if (error) {
+            Swal.fire('Error', errorResponse || 'Hubo un problema al eliminar al estudiante.', 'error');
+        }
+    }, [data, error]);
+
     return (
-        <div className="lista-estudiantes-container">
+        <div className="listaEstudiantes-container">
             <div className="listaEstudiantes-header">
                 <Typography variant="h6" gutterBottom className="listaEstudiantes-title">
                     Estudiantes
                 </Typography>
-                <IconButton className="add-icon" onClick={handleAddClick}>
+                <IconButton className="listaEstudiantes-submit" onClick={handleAddClick}>
                     <AddIcon />
                 </IconButton>
             </div>
             <Divider className="listaEstudiantes-divider" />
-            <TableContainer component={Paper} className="table-container">
+            <TableContainer component={Paper} className="tableInscripcion-container">
                 <Table className="table">
                     <TableHead>
                         <TableRow>
@@ -57,7 +106,7 @@ export default function ListaEstudianteInscribir({ inscritos }) {
                                 <TableCell className="table-cell">
                                     <IconButton
                                         onClick={() => handleRemoveClick(estudiante.EstudiantesMaterias.estudianteId)}
-                                        className="remove-icon"
+                                        className="listaEstudiantes-cancel"
                                     >
                                         <RemoveIcon />
                                     </IconButton>
@@ -68,26 +117,14 @@ export default function ListaEstudianteInscribir({ inscritos }) {
                 </Table>
             </TableContainer>
 
-            {/* Dialogo para inscribir estudiantes */}
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Inscribir Estudiante</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Nombre del Estudiante"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />
-                    {/* Agrega otros campos necesarios para la búsqueda e inscripción */}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancelar</Button>
-                    <Button onClick={() => { /* Lógica para inscribir estudiante */ handleClose(); }}>Inscribir</Button>
-                </DialogActions>
-            </Dialog>
+            {/* Diálogo para inscribir estudiantes */}
+            <InscribirEstudianteDialog
+                open={open}
+                onClose={onClose}
+                estudiantes={estudiantes}
+                inscritos={inscritos}
+                materiaId={materiaId}
+            />
         </div>
     );
 }

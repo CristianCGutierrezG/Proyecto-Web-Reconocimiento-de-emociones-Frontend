@@ -40,8 +40,8 @@
 
 
 .crearMateria-actions {
-    justify-content: space-between !important;
-    padding: 0 15px !important;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .crearMateria-cancel {

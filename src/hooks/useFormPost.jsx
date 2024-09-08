@@ -30,6 +30,7 @@ const useFormPost = (initialValues, requiredFields, url, method = 'POST', header
                 if (transformData) {
                     transformedData = transformData(formData);
                 }
+                console.log(transformedData)
                 await sendRequest(url, method, transformedData, header);
             }
         }

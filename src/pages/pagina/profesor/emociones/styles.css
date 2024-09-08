@@ -10,6 +10,7 @@
     box-sizing: border-box;
     overflow-y: auto; 
     max-height: 100%;
+    width: 100%;
 }
 
 .profesorPage-materia {
