@@ -12,7 +12,6 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (authData) { 
-            //se podria comprobar si el token expiro para sacar la informacion del localstorage
             localStorage.setItem('authData', JSON.stringify(authData));
         } else {
             localStorage.removeItem('authData');
@@ -38,7 +37,7 @@ const AuthProvider = ({ children }) => {
             }
         };
 
-        const interval = setInterval(checkExpiration, 1000); //cada segundo
+        const interval = setInterval(checkExpiration, 1000);
 
         return () => clearInterval(interval);
     }, [authData, alertShown]);
