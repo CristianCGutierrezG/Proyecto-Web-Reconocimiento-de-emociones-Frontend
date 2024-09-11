@@ -1,8 +1,13 @@
 import Menu from '../../../components/menu';
+import CameraCapture  from '../../../components/imagenes';
 
 
 export default function Home() {
     return (
-        <Menu/>
+        <div>
+            <Menu/>
+            <CameraCapture>
+            </CameraCapture>
+        </div>
     )
 }
