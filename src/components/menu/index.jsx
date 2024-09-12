@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 //Contextos
 import { AuthContext } from '../../context/AuthContext'
 import { DatosPersonalesContext } from '../../context/DatosPersonalesContext';
+import CameraCapture  from '../imagenes';
 
 
 //Material UI
