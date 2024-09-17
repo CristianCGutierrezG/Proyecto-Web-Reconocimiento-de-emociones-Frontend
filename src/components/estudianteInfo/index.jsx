@@ -10,28 +10,19 @@ function EstudianteInfo({ estudianteId }) {
     const { data: estudianteData, sendRequest: fetchEstudiante } = useHttp();
     const [estudiante, setEstudiante] = useState(null);
 
-    const headers = useMemo(() => {
-        if (authData && authData.token) {
-            return {
-                'Authorization': `Bearer ${authData.token}`,
-                'api': 'PEJC2024'
-            };
-        }
-        return {};
-    }, [authData]);
 
     useEffect(() => {
         const obtenerEstudiante = async () => {
             if (estudianteId && authData && !isTokenExpired()) {
                 const url = `http://localhost:3001/api/v1/estudiantes/${estudianteId}`;
-                fetchEstudiante(url, 'GET', null, headers);
+                fetchEstudiante(url, 'GET', null);
             } else {
                 setEstudiante(datosPersonales);
             }
         };
 
         obtenerEstudiante();
-    }, [estudianteId, datosPersonales, authData, isTokenExpired, fetchEstudiante, headers]);
+    }, [estudianteId, datosPersonales, authData, isTokenExpired, fetchEstudiante]);
 
     useEffect(() => {
         if (estudianteData) {

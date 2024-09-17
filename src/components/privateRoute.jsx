@@ -10,7 +10,7 @@ const PrivateRoute = ({ children, roles, redirectTo = "/" }) => {
     useEffect(() => {
         if (isTokenExpired()) {
             if (!alertShown.current) {
-                alert('Session has expired. Please log in again.');
+                alert('La sesion a espirado, por favor ingrese otra vez');
                 alertShown.current = true;  
                 logout();
                 setIsAllowed(false);

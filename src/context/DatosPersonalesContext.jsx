@@ -12,15 +12,6 @@ const  DatosPersonalesProvider = ({ children }) => {
     const { authData, isTokenExpired } = useContext(AuthContext);
     const [datosPersonales, setDatosPersonales] = useState(null);
     
-    const headers = useMemo(() => {
-        if (authData && authData.token) {
-            return {
-                'Authorization': `Bearer ${authData.token}`,
-                'api': 'PEJC2024'
-            };
-        }
-        return {};
-    }, [authData]);
 
     const { data, loading, error, sendRequest } = useHttp();
 
@@ -42,9 +33,9 @@ const  DatosPersonalesProvider = ({ children }) => {
                     break;
             }
 
-            sendRequest(fetchUrl, 'GET', null, headers);
+            sendRequest(fetchUrl, 'GET', null);
         }
-    }, [authData, isTokenExpired, headers, sendRequest]);
+    }, [authData, isTokenExpired, sendRequest]);
 
     useEffect(() => {
         if (data) {

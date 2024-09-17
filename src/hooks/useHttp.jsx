@@ -1,6 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
-function useHttp() {
+function useHttp(useAuthHeaders = true) {
+    const { authData } = useContext(AuthContext); 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -11,11 +13,18 @@ function useHttp() {
         setError(null);
 
         try {
+            // Si el prop useAuthHeaders es true, añadimos los headers de autenticación
+            const authHeaders = useAuthHeaders && authData && authData.token ? {
+                'Authorization': `Bearer ${authData.token}`,
+                'api': 'PEJC2024'
+            } : {};
+
             const options = {
                 method,
                 headers: {
                     'Content-Type': 'application/json',
-                    ...headers,
+                    ...authHeaders,
+                    ...headers, 
                 },
             };
 
@@ -38,7 +47,7 @@ function useHttp() {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [useAuthHeaders, authData]);
 
     return { data, loading, error, errorResponse, sendRequest };
 }

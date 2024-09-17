@@ -3,6 +3,7 @@ import useFormPost from '../../../hooks/useFormPost';
 import { AuthContext } from '../../../context/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Typography, Box} from '@mui/material';
+import { jwtDecode } from 'jwt-decode';
 import Loading from '../../../components/loading';
 import '../auth.styles.css';
 
@@ -36,11 +37,11 @@ export default function LogIn() {
 
     useEffect(() => {
         if (data) {
-            const expirationTime = new Date(new Date().getTime() + TOKEN_DURATION * 1000);
+            const decodedToken = jwtDecode(data.token);
             setAuthData({
                 token: data.token,
                 user: data.user,
-                expiration: expirationTime.toISOString(),
+                expiration: decodedToken.exp * 1000, 
             });
             navigate('/home');
         }

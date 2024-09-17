@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, CircularProgress, Pagination, Tooltip  } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Pagination, Tooltip, Alert } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import Loading from '../../loading';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../context/AuthContext';
 import useHttp from '../../../hooks/useHttp';
@@ -13,21 +13,10 @@ export default function InscribirEstudianteDialog({ open, onClose, inscritos, ma
     const { authData, isTokenExpired, logout } = useContext(AuthContext);
     const [customError, setCustomError] = useState(null);
 
-    const { data: estudiantes, loading, sendRequest } = useHttp();
+    const { data: estudiantes, loading, error: errorSearch, sendRequest } = useHttp();
 
     const limit = 6;
     const offset = (page - 1) * limit;
-
-    // Encabezados de autorización y API Key
-    const headers = useMemo(() => {
-        if (authData && authData.token) {
-            return {
-                'Authorization': `Bearer ${authData.token}`,
-                'api': 'PEJC2024',
-            };
-        }
-        return {};
-    }, [authData]);
 
     // Manejo de la búsqueda y la solicitud GET
     useEffect(() => {
@@ -37,10 +26,10 @@ export default function InscribirEstudianteDialog({ open, onClose, inscritos, ma
             if (authData && isTokenExpired()) {
                 logout();
             } else {
-                sendRequest(searchUrl, 'GET', null, headers);
+                sendRequest(searchUrl, 'GET', null);
             }
         }
-    }, [searchTerm, page, headers, authData, isTokenExpired, logout, sendRequest]);
+    }, [searchTerm, page, authData, isTokenExpired, logout, sendRequest]);
 
 
     const { data: inscripcionData, sendRequest: postRequest, error, errorResponse } = useHttp();
@@ -54,7 +43,7 @@ export default function InscribirEstudianteDialog({ open, onClose, inscritos, ma
         };
 
         try {
-            await postRequest(url, 'POST', body, headers);
+            await postRequest(url, 'POST', body);
         } catch (error) {
             Swal.fire('Error', 'No se pudo inscribir al estudiante.', 'error');
         }
@@ -109,9 +98,17 @@ export default function InscribirEstudianteDialog({ open, onClose, inscritos, ma
                         <SearchIcon />
                     </IconButton>
                 </div>
-                {loading ? (
-                    <CircularProgress size={24} />
-                ) : (
+                {loading && (
+                    <Loading />
+                )}
+
+                {/* Mensaje de error */}
+                {errorSearch && (
+                    <Alert severity="error" className="error-message">
+                        Ocurrió un error al cargar los estudiantes: {errorSearch.message}
+                    </Alert>
+                )}
+                {!errorSearch && searchTerm.trim() !== '' && estudiantes && (
                     <>
                         <TableContainer component={Paper}>
                             <Table>

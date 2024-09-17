@@ -21,14 +21,21 @@ const Materia = ({ id, nombre }) => {
 
         window.addEventListener('storage', handleStorageChange);
 
-
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, [id]);
 
     return (
-        <Box className="materia-root" style={{ borderColor: color, borderWidth: '2px', borderLeft: '6px', borderStyle: 'solid' }}>
+        <Box 
+            className="materia-root" 
+            style={{
+                borderTop: `2px solid ${color}`,
+                borderRight: `2px solid ${color}`,
+                borderBottom: `2px solid ${color}`,
+                borderLeft: `6px solid ${color}`
+            }}
+        >
             <Typography variant="body4" className="materia-nombre">{nombre}</Typography>
         </Box>
     );

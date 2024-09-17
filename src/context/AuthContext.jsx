@@ -1,34 +1,58 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [authData, setAuthData] = useState(() => {
         const savedAuthData = localStorage.getItem('authData');
-        return savedAuthData ? JSON.parse(savedAuthData) : null; 
+        return savedAuthData ? JSON.parse(savedAuthData) : null;
     });
 
-    const [alertShown, setAlertShown] = useState(false);
-
     useEffect(() => {
-        if (authData) { 
+        if (authData) {
             localStorage.setItem('authData', JSON.stringify(authData));
         } else {
             localStorage.removeItem('authData');
         }
     }, [authData]);
 
-    //Provisional si se agrega el recoverToken
-    useEffect(() => {
-        const checkExpiration = () => {
-            if (authData && authData.expiration) {
-                const expirationTime = new Date(authData.expiration).getTime();
-                const currentTime = new Date().getTime();
-                const timeRemaining = expirationTime - currentTime;
+    const recoverToken = async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/v1/auth/recover-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authData.token}`,
+                },
+                body: JSON.stringify({ id: authData.user.id }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                const decodedToken = jwtDecode(data.token);
+                setAuthData({
+                    ...authData,
+                    token: data.token,
+                    expiration: decodedToken.exp * 1000,
+                });
+            } else {
+                console.error('Error al recuperar el token');
+            }
+        } catch (error) {
+            console.error('Error en la solicitud de recuperación de token', error);
+        }
+    };
 
-                if (timeRemaining <= 15 * 60 * 1000 && !alertShown) {
-                    alert('Your session will expire in 15 minutes.');
-                    setAlertShown(true);
+    useEffect(() => {
+        const checkTokenExpiration = () => {
+            if (authData && authData.token) {
+                const decodedToken = jwtDecode(authData.token);
+                const currentTime = Date.now();
+                const tokenExpirationTime = decodedToken.exp * 1000;
+                const timeRemaining = tokenExpirationTime - currentTime;
+
+                if (timeRemaining <= 5 * 60 * 1000) { // Si faltan menos de 5 minutos
+                    recoverToken();
                 }
 
                 if (timeRemaining <= 0) {
@@ -37,23 +61,22 @@ const AuthProvider = ({ children }) => {
             }
         };
 
-        const interval = setInterval(checkExpiration, 1000);
+        const interval = setInterval(checkTokenExpiration, 60 * 1000); // Comprobar cada minuto
 
         return () => clearInterval(interval);
-    }, [authData, alertShown]);
+    }, [authData]);
 
-    const logout = () => { 
+    const logout = () => {
         setAuthData(null);
-        setAlertShown(false);
     };
 
     const isTokenExpired = () => {
         if (!authData || !authData.expiration) return true;
-        return new Date().getTime() > new Date(authData.expiration).getTime();
+        return Date.now() > authData.expiration;
     };
 
     return (
-        <AuthContext.Provider value={{ authData, setAuthData, logout, isTokenExpired }}>
+        <AuthContext.Provider value={{ authData, setAuthData, logout, isTokenExpired, recoverToken }}>
             {children}
         </AuthContext.Provider>
     );
