@@ -30,7 +30,6 @@ const CameraCapture = () => {
         }
     };
 
-    // Maneja la respuesta de inscripción exitosa
     useEffect(() => {
         if (data) {
             console.log("logrado")

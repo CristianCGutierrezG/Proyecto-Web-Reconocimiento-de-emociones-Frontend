@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext, useMemo } from 'react';
+import React, { createContext, useState, useEffect, useContext} from 'react';
 import useHttp from '../hooks/useHttp.jsx';
 import { AuthContext } from './AuthContext.jsx';
 
@@ -10,15 +10,6 @@ const EmocionesProvider = ({ children }) => {
     const [estudianteId, setEstudianteId] = useState(null);
     const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
 
-    const headers = useMemo(() => {
-        if (authData && authData.token) {
-            return {
-                'Authorization': `Bearer ${authData.token}`,
-                'api': 'PEJC2024'
-            };
-        }
-        return {};
-    }, [authData]);
 
     const { data: emocionesData, sendRequest: sendEmocionesRequest } = useHttp();
 
@@ -36,10 +27,10 @@ const EmocionesProvider = ({ children }) => {
                 if (dateRange.startDate) params.append('startDate', dateRange.startDate);
                 if (dateRange.endDate) params.append('endDate', dateRange.endDate);
 
-                sendEmocionesRequest(`${emocionesUrl}?${params.toString()}`, 'GET', null, headers);
+                sendEmocionesRequest(`${emocionesUrl}?${params.toString()}`, 'GET', null);
             }
         }
-    }, [authData, estudianteId, isTokenExpired, headers, sendEmocionesRequest, dateRange]);
+    }, [authData, estudianteId, isTokenExpired, sendEmocionesRequest, dateRange]);
 
     useEffect(() => {
         if (emocionesData) {

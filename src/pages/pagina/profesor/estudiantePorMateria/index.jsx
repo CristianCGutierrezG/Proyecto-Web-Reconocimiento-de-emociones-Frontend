@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from '../../../../components/menu';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Typography, CircularProgress, Divider, Grid, Button } from '@mui/material';
@@ -7,26 +7,14 @@ import { useFetchMateriasProfesor } from '../../../../hooks/useFetchMateriasProf
 import Swal from 'sweetalert2';
 import EditarMateriaDialog from '../../../../components/editarMateria';
 import useHttp from '../../../../hooks/useHttp';
-import { AuthContext } from '../../../../context/AuthContext';
 import './styles.css';
 
 export default function EstudiantesPorMateria() {
     const { materiaId } = useParams();
     const navigate = useNavigate(); // Hook para redireccionar
     const { materiaInfo, loading, error } = useFetchMateriasProfesor(materiaId);
-    const { authData } = useContext(AuthContext);
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const { data, sendRequest: patchRequest, errorResponse } = useHttp();
-
-    const headers = useMemo(() => {
-        if (authData && authData.token) {
-            return {
-                'Authorization': `Bearer ${authData.token}`,
-                'api': 'PEJC2024'
-            };
-        }
-        return {};
-    }, [authData]);
 
     const handleDelete = async () => {
         const result = await Swal.fire({
@@ -43,7 +31,7 @@ export default function EstudiantesPorMateria() {
         if (result.isConfirmed) {
             try {
                 const url = `http://localhost:3001/api/v1/materias/deleteActive/${materiaId}`;
-                await patchRequest(url, 'PATCH', null, headers);
+                await patchRequest(url, 'PATCH', null);
             } catch (error) {
                 Swal.fire('Error', 'Hubo un problema al eliminar la materia.', 'error');
             }

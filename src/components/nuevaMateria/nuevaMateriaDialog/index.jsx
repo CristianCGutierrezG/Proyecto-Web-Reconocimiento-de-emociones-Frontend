@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Dialog,
     DialogActions,
@@ -18,7 +18,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import Swal from 'sweetalert2';
 import useFormPost from '../../../hooks/useFormPost';
-import { AuthContext } from '../../../context/AuthContext';
 import './styles.css'; // Importando el archivo de estilos
 
 const transformData = (formData) => {
@@ -36,17 +35,6 @@ const transformData = (formData) => {
 };
 
 export default function NuevaMateriaDialog({ open, onClose }) {
-    const { authData } = useContext(AuthContext);
-
-    const headers = useMemo(() => {
-        if (authData && authData.token) {
-            return {
-                'Authorization': `Bearer ${authData.token}`,
-                'api': 'PEJC2024',
-            };
-        }
-        return {};
-    }, [authData]);
 
     const initialValues = {
         materia: '',
@@ -78,7 +66,7 @@ export default function NuevaMateriaDialog({ open, onClose }) {
         requiredFields,
         'http://localhost:3001/api/v1/materias/token',
         'POST',
-        headers,
+        null,
         (formData) => transformData(formData)
     );
     

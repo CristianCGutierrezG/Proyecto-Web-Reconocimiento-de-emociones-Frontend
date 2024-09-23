@@ -103,7 +103,6 @@ const GraficoEmocionesMensualMateria = ({ materiaId, horarios }) => {
 
   const { emotionsCount, labelsWithTime } = processData();
 
-  // Check if there is any emotion data to display
   const hasEmotionData = Object.values(emotionsCount).some(dayEmotions =>
     Object.values(dayEmotions).some(count => count > 0)
   );

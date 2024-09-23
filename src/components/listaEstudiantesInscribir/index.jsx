@@ -1,27 +1,15 @@
-import React, { useState, useMemo, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Typography, Divider } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import InscribirEstudianteDialog from './inscribirEstudianteDialog';
 import Swal from 'sweetalert2';
 import useHttp from '../../hooks/useHttp';
-import { AuthContext } from '../../context/AuthContext';
 import './styles.css';
 
 export default function ListaEstudianteInscribir({ inscritos, estudiantes, materiaId }) {
     const [open, setOpen] = useState(false);
-    const { authData } = useContext(AuthContext);
     const { data, sendRequest: deleteRequest, errorResponse, error } = useHttp();
-
-    const headers = useMemo(() => {
-        if (authData && authData.token) {
-            return {
-                'Authorization': `Bearer ${authData.token}`,
-                'api': 'PEJC2024',
-            };
-        }
-        return {};
-    }, [authData]);
 
     const handleAddClick = () => {
         setOpen(true);
@@ -52,7 +40,7 @@ export default function ListaEstudianteInscribir({ inscritos, estudiantes, mater
             };
 
             try {
-                await deleteRequest(url, 'PATCH', body, headers);
+                await deleteRequest(url, 'PATCH', body);
             } catch (err) {
                 Swal.fire('Error', 'Hubo un problema al eliminar al estudiante.', 'error');
             }

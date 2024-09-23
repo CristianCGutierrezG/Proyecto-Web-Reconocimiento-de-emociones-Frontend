@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import useHttp from './useHttp';
 import { AuthContext } from '../context/AuthContext';
 
@@ -7,15 +7,6 @@ const useFetchMaterias = (estudianteId) => {
   const { authData, isTokenExpired } = useContext(AuthContext);
   const { data: materiasData, sendRequest: sendMateriasRequest } = useHttp();
 
-  const headers = useMemo(() => {
-    if (authData && authData.token) {
-      return {
-        'Authorization': `Bearer ${authData.token}`,
-        'api': 'PEJC2024'
-      };
-    }
-    return {};
-  }, [authData]);
 
   useEffect(() => {
     const fetchMaterias = async () => {
@@ -31,13 +22,13 @@ const useFetchMaterias = (estudianteId) => {
         }
 
         if (materiasUrl) {
-          sendMateriasRequest(materiasUrl, 'GET', null, headers);
+          sendMateriasRequest(materiasUrl, 'GET', null);
         }
       }
     };
 
     fetchMaterias();
-  }, [authData, estudianteId, isTokenExpired, sendMateriasRequest, headers]);
+  }, [authData, estudianteId, isTokenExpired, sendMateriasRequest]);
 
   useEffect(() => {
     if (materiasData) {
