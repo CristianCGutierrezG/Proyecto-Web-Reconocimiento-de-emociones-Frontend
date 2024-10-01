@@ -115,6 +115,15 @@ const CameraCapture = () => {
         }
     };
 
+    const styles = {
+        cameraContainer: {
+            padding: '10px',  // Añadir padding alrededor de la cámara
+            backgroundColor: '#F8F9FA',  // Fondo claro para hacer contraste
+            borderRadius: '8px',  // Bordes redondeados
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',  // Sombra para darle profundidad
+        },
+    }
+
     // Hook para capturar la foto cada 60 segundos
     useEffect(() => {
         const interval = setInterval(() => {
@@ -126,8 +135,8 @@ const CameraCapture = () => {
     }, []);
 
     return (
-        <div>
-            <video ref={videoRef} width="300" height="300" autoPlay playsInline></video>
+        <div style={styles.cameraContainer}>
+            <video ref={videoRef} width="auto" height="300" autoPlay playsInline></video>
             <br />
             {/* Botón para capturar la imagen */}
             <button onClick={capturePhoto}>Capturar Foto</button>

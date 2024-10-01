@@ -10,14 +10,16 @@ const Header = () => {
 };
 
 const styles = {
-    header: {
-        padding: '10px',
-        textAlign: 'center',
-        backgroundColor: '#F4F4F9',
-        borderBottom: '1px solid #ddd',
+    container: {
+        backgroundColor: '#6C757D',  // Color oscuro del fondo
+        width: '100%',  // Para que ocupe el 100% del espacio
+        padding: '10px', // Espacio alrededor del título
     },
     title: {
-        color: '#8a2be2',
+        color: '#6D28D9',  // Color del texto
+        textAlign: 'center',  // Centrar el texto
+        margin: 0,  // Remover margen para ajustar el espacio
+        fontSize: '2rem',  // Ajustar el tamaño del texto
     },
 };
 

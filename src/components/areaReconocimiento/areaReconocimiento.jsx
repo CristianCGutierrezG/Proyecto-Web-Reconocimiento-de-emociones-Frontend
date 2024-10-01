@@ -1,6 +1,12 @@
 // src/components/RecognitionArea.js
 import React, { useState } from 'react';
 import CameraCapture from '../imagenes';
+import { Box, Typography, TextField, Button, Avatar, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
+import PersonIcon from '@mui/icons-material/Person';
+import InfoIcon from '@mui/icons-material/Info';
+import ComputerIcon from '@mui/icons-material/Computer';
+import Header from '../header/header';
 
 const RecognitionArea = () => {
     const [emotion, setEmotion] = useState('FELIZ');
@@ -15,11 +21,14 @@ const RecognitionArea = () => {
     };
 
     return (
-        <div style={styles.container}>
-            <div style={styles.imagePlaceholder}>
-                <CameraCapture></CameraCapture>
-            </div>
-        </div>
+        <Box display="flex" height="100vh" bgcolor="#F5F5F5">
+            {/* Sidebar */}
+            <Box width="25%" bgcolor="#B0BEC5" p={3} display="flex" flexDirection="column" alignItems="center">
+                {/* Avatar and Info */}
+               <Header></Header> 
+            </Box>
+            <CameraCapture></CameraCapture>
+        </Box>
     );
 };
 

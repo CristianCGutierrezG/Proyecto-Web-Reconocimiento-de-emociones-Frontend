@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import Menu from '../../../components/menu';
+import Header from '../../../components/header/header';
 import RecognitionArea from '../../../components/areaReconocimiento/areaReconocimiento';
-import { Height } from '@mui/icons-material';
 
 const styles = {
     appContainer: {
@@ -25,13 +26,26 @@ const styles = {
     }
 };
 
-export default function Home() {
+export default function HomeEstudiante() {
+    const [triggerCapture, setTriggerCapture] = useState(false);
+
+    // Función para disparar la captura cada 15 segundos
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTriggerCapture(prevState => !prevState);  // Alterna el estado para disparar el evento en el componente Imagen
+        }, 15000);  // Intervalo de 15 segundos
+
+        // Limpiar el intervalo cuando el componente se desmonte
+        return () => clearInterval(intervalId);
+    }, []);
+
     return (
         <div style={styles.appContainer}>
-            <Menu style={styles.sidebar}></Menu>
+            <Menu style={styles.sidebar} />
             <div style={styles.mainArea}>
-                <RecognitionArea></RecognitionArea>
+                <Header />
+                <RecognitionArea triggerCapture={triggerCapture} />
             </div>
         </div>
-    )
+    );
 }
