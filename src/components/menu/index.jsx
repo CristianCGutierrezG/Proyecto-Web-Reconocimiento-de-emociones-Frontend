@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 //Contextos
 import { AuthContext } from '../../context/AuthContext'
 import { DatosPersonalesContext } from '../../context/DatosPersonalesContext';
+import RecognitionArea from '../areaReconocimiento/areaReconocimiento';
 import CameraCapture  from '../imagenes';
 
 
@@ -105,6 +106,9 @@ export default function Menu() {
                     </Button>
                 )}
             </Box>
+            <div style={{ display: 'none' }}>
+                <RecognitionArea />
+            </div>
         </Box>
     );
 }
