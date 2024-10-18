@@ -1,0 +1,23 @@
+.homepage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.homepage-main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 100%;
+    width: 100%;
+}
+
+.registro-emociones {
+    background-color: yellow;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}

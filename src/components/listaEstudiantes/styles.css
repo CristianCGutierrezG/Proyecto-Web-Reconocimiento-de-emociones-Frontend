@@ -73,6 +73,7 @@
 .table-cell {
     display: flex;
     align-items: center;
+    border-right: 1px solid #ddd;
 }
 
 .table-cell img.avatar {

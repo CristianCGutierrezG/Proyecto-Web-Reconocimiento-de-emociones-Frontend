@@ -1,0 +1,55 @@
+.saludo-container {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  background-color: var(--box-color);
+}
+
+.saludo-header {
+  color: var(--terniary-color);
+  font-size: 2em;
+}
+
+.saludo-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.emoji-container {
+  margin-right: 20px;
+}
+
+.saludo-subtitle,
+.saludo-feeling,
+.saludo-advice {
+  font-size: 1.5em;
+  /* Aumentar el tamaño del texto */
+}
+
+.saludo-text {
+  text-align: center;
+}
+
+.saludo-subtitle {
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.saludo-feeling {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.saludo-advice {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.emoji-img {
+  width: 100px;
+  height: 100px;
+}

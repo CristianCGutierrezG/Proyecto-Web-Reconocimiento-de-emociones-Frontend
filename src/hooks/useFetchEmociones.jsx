@@ -22,7 +22,7 @@ const useFetchEmociones = (estudianteId, dateRange) => {
           if (dateRange.startDate) params.append('startDate', dateRange.startDate);
           if (dateRange.endDate) params.append('endDate', dateRange.endDate);
 
-          sendEmocionesRequest(`${emocionesUrl}?${params.toString()}`, 'GET', null);
+          await sendEmocionesRequest(`${emocionesUrl}?${params.toString()}`, 'GET', null);
 
         }
       }

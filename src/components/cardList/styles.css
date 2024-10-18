@@ -1,0 +1,41 @@
+/* Estilo general para la lista de tarjetas */
+.card-list {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+/* Estilo para cada enlace de tarjeta */
+.card-link {
+    text-decoration: none; 
+}
+
+/* Estilo para cada tarjeta */
+.card-item {
+    
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--box-shadow-color); 
+    transition: transform 0.2s ease-in-out;
+}
+
+.card-item:hover {
+    transform: scale(1.02); 
+}
+
+/* Estilo para el contenido de la tarjeta */
+.card-content {
+    background-color: var(--box-color) ;
+    padding: 20px;
+}
+
+/* Estilo para el título de la tarjeta */
+.card-title {
+    color: var(--terniary-color);
+    margin-top: 10px;
+}
+
+/* Estilo para el texto de la tarjeta */
+.card-text {
+    color: var(--text-color);
+}

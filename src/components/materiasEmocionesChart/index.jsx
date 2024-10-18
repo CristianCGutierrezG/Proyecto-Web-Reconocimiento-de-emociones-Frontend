@@ -8,7 +8,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { addDays, subDays, startOfWeek, endOfWeek, format } from 'date-fns';
 import es from 'date-fns/locale/es';
 import './styles.css';
-import { color } from 'chart.js/helpers';
 
 const MateriaEmocionesChart = ({ materiaId, horarios }) => {
     const { emociones, setDateRange, setMateriaId } = useContext(EmocionesPorMateriaContext);

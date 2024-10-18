@@ -17,7 +17,7 @@ const EmocionesPorMateriaProvider = ({ children }) => {
         let emocionesUrl;
         if (authData && !isTokenExpired()) {
             if (materiaId) {
-                emocionesUrl = `http://localhost:3001/api/v1/emociones?id=${materiaId}`;
+                emocionesUrl = `http://localhost:3001/api/v1/emociones/materia?id=${materiaId}`;
             }
 
             if (emocionesUrl) {

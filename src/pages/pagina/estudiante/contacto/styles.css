@@ -1,0 +1,22 @@
+.contactoPage-container {
+    display: flex;
+    height: 100vh;
+}
+
+
+.contactoPage-main {
+    display: flex;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; 
+    max-height: 100%;
+    width: 100%;
+}
+
+.contactoPage-interior{
+    background-color: var(--box-color);
+    box-shadow: 0 2px 4px var(--box-shadow-color);
+    flex: 1;
+    border-radius: 8px;
+    padding: 20px;
+}

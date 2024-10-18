@@ -58,7 +58,7 @@ export default function Menu() {
             home: '/home',
             emociones: '/emociones/estudiante',
             materias: '/materias/estudiante',
-            contacto: '/materias/profesor',
+            contacto: '/contacto/estudiante',
             ajustes: '/configuracion/estudiante',
         },
         "Profesional de salud": {

@@ -1,0 +1,42 @@
+.lista-materias-container {
+    padding: 10px;
+    background-color: var(--box-color);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px var(--box-shadow-color);
+    overflow-y: auto; 
+    font-family: 'Arial', sans-serif;
+}
+
+.lista-materias-titulo {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--terniary-color);
+    margin-bottom: 20px;
+}
+
+.lista-materias {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+    overflow-y: auto;
+    max-height: 400px; 
+    padding-right: 10px;
+}
+
+.lista-materias::-webkit-scrollbar {
+    margin-left: 5px;
+    width: 8px;
+}
+
+.lista-materias::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.lista-materias::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+}
+
+
+  

@@ -36,7 +36,9 @@ export default function EmocionesPorMateria() {
                             </div>
                         )}
                         {materiaInfo && materiaInfo.inscritos && (
-                            <ListaEstudiante inscritos={materiaInfo.inscritos} />
+                            <div className='profesorPage-lista'>
+                                <ListaEstudiante inscritos={materiaInfo.inscritos} />
+                            </div>
                         )}
                     </div>
                 </div>

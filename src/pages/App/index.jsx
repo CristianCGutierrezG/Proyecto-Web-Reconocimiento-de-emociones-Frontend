@@ -18,6 +18,7 @@ import MateriasProfesor from "../pagina/profesor/materias/index.jsx";
 import EmocionesEstudiante from "../pagina/estudiante/emociones/index.jsx";
 import MateriasEstudiante from "../pagina/estudiante/materias/index.jsx";
 import ConfiguracionEstudiante from "../pagina/estudiante/configuracion/index.jsx";
+import ContactoEstudiante from "../pagina/estudiante/contacto/index.jsx";
 import EmocionesProSalud from "../pagina/proSalud/emociones/index.jsx";
 import PrivateRoute from "../../components/privateRoute.jsx";
 import EstudiantePorMateria from "../pagina/profesor/estudiantePorMateria/index.jsx";
@@ -107,6 +108,10 @@ function App() {
                 <Route
                   path="/configuracion/estudiante"
                   element={<ConfiguracionEstudiante />}
+                />
+                <Route
+                  path="/contacto/estudiante"
+                  element={<ContactoEstudiante />}
                 />
               </Route>
               <Route
