@@ -1,36 +1,28 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import {
-  format,
-  startOfWeek,
-  addWeeks,
-  subWeeks,
-  addDays,
-} from "date-fns";
+import { format, startOfWeek, addWeeks, subWeeks, addDays } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { es } from "date-fns/locale";
 import Emocion from "./emociones/index.jsx";
+import TooltipEmocion from "./toolTipEmocion/index.jsx";
 import { EmocionesContext } from "../../context/EmocionesContext.jsx";
 import "./styles.css";
 
 const Horario = ({ estudianteId }) => {
-  const { emociones, setEstudianteId, setDateRange } = useContext(EmocionesContext) || {};
-  const [currentWeek, setCurrentWeek] = useState(
-    startOfWeek(new Date(), { weekStartsOn: 0, locale: es })
-  );
-
+  const { emociones, setEstudianteId, setDateRange, limpiarEmociones} = useContext(EmocionesContext) || {};
+  const [currentWeek, setCurrentWeek] = useState(startOfWeek(new Date(), { weekStartsOn: 0, locale: es }));
+  const [hoveredEmociones, setHoveredEmociones] = useState(null);
+  const [hoveredPosition, setHoveredPosition] = useState({ x: 0, y: 0 });
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   useEffect(() => {
-    // Establece el estudianteId en el contexto
     if (estudianteId) {
-      setEstudianteId(estudianteId);
+        setEstudianteId(estudianteId);
     }
-  }, [estudianteId, setEstudianteId]);
+}, [estudianteId, setEstudianteId, limpiarEmociones]);
 
   useEffect(() => {
-    // Cuando cambia la semana, actualiza el rango de fechas en el contexto
     const startOfCurrentWeek = currentWeek.toISOString();
     const endOfCurrentWeek = addDays(currentWeek, 7).toISOString();
     setDateRange({
@@ -65,25 +57,41 @@ const Horario = ({ estudianteId }) => {
       return acc;
     }, {});
 
-    const emocionPredominantePorHora = Object.keys(emocionesPorHora).map(
-      (hora) => {
-        const emocionesEnHora = emocionesPorHora[hora];
-        const conteoEmociones = emocionesEnHora.reduce((conteo, emocion) => {
-          conteo[emocion.emocion] = (conteo[emocion.emocion] || 0) + 1;
-          return conteo;
-        }, {});
+    return Object.keys(emocionesPorHora).map((hora) => {
+      const emocionesEnHora = emocionesPorHora[hora];
+      const conteoEmociones = emocionesEnHora.reduce((conteo, emocion) => {
+        conteo[emocion.emocion] = (conteo[emocion.emocion] || 0) + 1;
+        return conteo;
+      }, {});
 
-        const emocionPredominante = Object.keys(conteoEmociones).reduce(
-          (a, b) => (conteoEmociones[a] > conteoEmociones[b] ? a : b)
-        );
-        return {
-          hora: parseInt(hora, 10),
-          emocion: emocionPredominante,
-        };
-      }
-    );
+      const emocionesArray = Object.keys(conteoEmociones).map((emocion) => ({
+        emocion,
+        count: conteoEmociones[emocion],
+      }));
 
-    return emocionPredominantePorHora;
+      return {
+        hora: parseInt(hora, 10),
+        emociones: emocionesArray,
+      };
+    });
+  };
+
+  const emocionPredo = (emociones) => {
+    const emocionConMayorCount = emociones.reduce((prev, current) => {
+      return (prev.count > current.count) ? prev : current;
+    });
+    return emocionConMayorCount.emocion;
+  }
+
+  const handleMouseEnter = (emociones, event) => {
+    if (emociones.length > 0) {
+      setHoveredEmociones(emociones);
+      setHoveredPosition({ x: event.clientX - 170, y: event.clientY - 15 });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredEmociones(null);
   };
 
   const hours = [...Array(24)].map((_, i) => i);
@@ -101,6 +109,20 @@ const Horario = ({ estudianteId }) => {
           <ArrowForward />
         </IconButton>
       </Box>
+
+      <Box className="horario-days">
+        <Box className="horario-days-box" />
+        <Box className="horario-days-fixed">
+          {[...Array(7)].map((_, index) => (
+            <Box key={index} className="horario-day-fixed">
+              <Typography variant="subtitle1" className="horario-day-title">
+                {format(addDays(currentWeek, index), "EEE dd", { locale: es })}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+      
       <Box className="horario-container-sup">
         <Box className="horario-container">
           <Box className="horario-hours">
@@ -113,19 +135,23 @@ const Horario = ({ estudianteId }) => {
           <Box className="horario-grid">
             {[...Array(7)].map((_, index) => (
               <Box key={index} className="horario-day">
-                <Typography variant="subtitle1" className="horario-day-title">
-                  {format(addDays(currentWeek, index), "EEE dd", { locale: es })}
-                </Typography>
                 {hours.map((hour) => {
-                  const emocionPredominante = getEmocionesForDay(
-                    addDays(currentWeek, index)
-                  ).find((e) => e.hora === hour);
+                  const emocionPredominante = getEmocionesForDay(addDays(currentWeek, index)).find((e) => e.hora === hour);
                   return (
-                    <Box key={hour} className="horario-hour-slot">
+                    <Box
+                      key={hour}
+                      className="horario-hour-slot"
+                      onMouseEnter={(event) =>
+                        emocionPredominante
+                          ? handleMouseEnter(emocionPredominante.emociones, event)
+                          : null
+                      }
+                      onMouseLeave={handleMouseLeave}
+                    >
                       {emocionPredominante && (
                         <Emocion
                           key={emocionPredominante.emocion}
-                          emocion={{ emocion: emocionPredominante.emocion }}
+                          emocion={{ emocion: emocionPredo(emocionPredominante.emociones) }}
                           hora={hour}
                         />
                       )}
@@ -137,6 +163,14 @@ const Horario = ({ estudianteId }) => {
           </Box>
         </Box>
       </Box>
+      {hoveredEmociones && (
+        <Box
+          className="tooltip-container"
+          style={{ top: hoveredPosition.y, left: hoveredPosition.x }}
+        >
+          <TooltipEmocion emocionesPorHora={hoveredEmociones} />
+        </Box>
+      )}
     </Box>
   );
 };

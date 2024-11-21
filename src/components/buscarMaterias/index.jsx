@@ -12,6 +12,7 @@ function BuscarMaterias() {
   const [busqueda, setBusqueda] = useState('');
   const [selectedMateria, setSelectedMateria] = useState(null);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const { authData, isTokenExpired, logout } = useContext(AuthContext);
   const { data: materias, loading, error, sendRequest } = useHttp();
 
@@ -29,6 +30,13 @@ function BuscarMaterias() {
       }
     }
   }, [busqueda, page, authData, isTokenExpired, logout, sendRequest]);
+
+  // Actualizamos el total de páginas cuando obtenemos los datos.
+  useEffect(() => {
+    if (materias && materias.metadata) {
+      setTotalPages(Math.ceil(materias.metadata.total / limit));
+    }
+  }, [materias]);
 
   const handleCardClick = (materia) => {
     setSelectedMateria(materia);
@@ -61,12 +69,8 @@ function BuscarMaterias() {
         </IconButton>
       </div>
 
-      {/* Mostrar indicador de carga */}
-      {loading && (
-        <Loading />
-      )}
+      {loading && <Loading />}
 
-      {/* Mostrar error si existe */}
       {error && (
         <Alert severity="error" className="error-message">
           Ocurrió un error al cargar las materias: {error.message}
@@ -76,16 +80,16 @@ function BuscarMaterias() {
       {!error && busqueda.trim() !== '' && materias && (
         <>
           <Grid container spacing={2} className="tarjetas-container">
-            {materias && materias.map((materia) => (
+            {materias.data.map((materia) => (
               <Grid item xs={12} sm={6} md={4} key={materia.id}>
                 <TarjetaMateria materia={materia} onClick={handleCardClick} />
               </Grid>
             ))}
           </Grid>
 
-          {materias && materias.length > 0 && (
+          {materias.data.length > 0 && totalPages > 1 && (
             <Pagination
-              count={Math.ceil(materias.totalCount / limit)}
+              count={totalPages}
               page={page}
               onChange={handlePageChange}
               color="primary"

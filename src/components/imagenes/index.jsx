@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 
 const CameraCapture = () => {
-    const { authData, isTokenExpired} = useContext(AuthContext);
+    const { authData} = useContext(AuthContext);
     const { data , sendRequest, error } = useHttp();
     const headers = useMemo(() => {
         if (authData && authData.token) {

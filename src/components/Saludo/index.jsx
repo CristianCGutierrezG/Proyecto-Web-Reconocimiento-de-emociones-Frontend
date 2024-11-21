@@ -102,89 +102,99 @@ const mensajesPorEmocion = {
 };
 
 const calcularEmocionPredominante = (emociones) => {
-    const conteoEmociones = emociones.reduce((acc, emocion) => {
-      acc[emocion.emocion] = (acc[emocion.emocion] || 0) + 1;
-      return acc;
-    }, {});
-    
-    const emocionesOrdenadas = Object.keys(conteoEmociones)
-      .map((emocion) => ({
-        emocion,
-        porcentaje: ((conteoEmociones[emocion] / emociones.length) * 100).toFixed(0),
-      }))
-      .sort((a, b) => b.porcentaje - a.porcentaje);
-    
-    return emocionesOrdenadas[0];
-  };
-  
-  // Función para seleccionar un mensaje aleatorio según la emoción
-  const seleccionarMensajeAleatorio = (emocion) => {
-    const mensajes = mensajesPorEmocion[emocion] || [];
-    if (mensajes.length > 0) {
-      return mensajes[Math.floor(Math.random() * mensajes.length)];
-    }
-    return '';
-  };
-  
-  const Saludo = () => {
-    const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
-    const { datosPersonales } = useContext(DatosPersonalesContext);
-    
-    const currentDate = new Date();
-    const startDate = startOfWeek(currentDate, { weekStartsOn: 0 }).toISOString().split('T')[0];
-    const endDate = addDays(new Date(startDate), 6).toISOString().split('T')[0];
-    
-    if (!dateRange.startDate) {
-      setDateRange({ startDate, endDate });
-    }
-    
-    const emociones = useFetchEmociones(null, dateRange);
-  
-    if (emociones.length === 0) {
-      return null;
-    }
-  
-    const emocionPredominante = calcularEmocionPredominante(emociones);
-    const mensajeRandom = seleccionarMensajeAleatorio(emocionPredominante.emocion);
-  
-    const getEmoji = (emocion) => {
-      switch (emocion) {
-        case 'Feliz':
-          return <img src={Feliz} alt="Feliz" className="emoji-img" />;
-        case 'Triste':
-          return <img src={Triste} alt="Triste" className="emoji-img" />;
-        case 'Enojado':
-          return <img src={Enojado} alt="Enojado" className="emoji-img" />;
-        case 'Disgustado':
-          return <img src={Disgustado} alt="Disgustado" className="emoji-img" />;
-        case 'Miedoso':
-          return <img src={Miedoso} alt="Miedoso" className="emoji-img" />;
-        case 'Neutral':
-          return <img src={Neutral} alt="Neutral" className="emoji-img" />;
-        case 'Sorprendido':
-          return <img src={Sorprendido} alt="Sorprendido" className="emoji-img" />;
-        default:
-          return null;
-      }
-    };
-  
+  const conteoEmociones = emociones.reduce((acc, emocion) => {
+    acc[emocion.emocion] = (acc[emocion.emocion] || 0) + 1;
+    return acc;
+  }, {});
+
+  const emocionesOrdenadas = Object.keys(conteoEmociones)
+    .map((emocion) => ({
+      emocion,
+      porcentaje: ((conteoEmociones[emocion] / emociones.length) * 100).toFixed(0),
+    }))
+    .sort((a, b) => b.porcentaje - a.porcentaje);
+
+  return emocionesOrdenadas[0];
+};
+
+// Función para seleccionar un mensaje aleatorio según la emoción
+const seleccionarMensajeAleatorio = (emocion) => {
+  const mensajes = mensajesPorEmocion[emocion] || [];
+  if (mensajes.length > 0) {
+    return mensajes[Math.floor(Math.random() * mensajes.length)];
+  }
+  return '';
+};
+
+const Saludo = () => {
+  const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
+  const { datosPersonales } = useContext(DatosPersonalesContext);
+
+  const currentDate = new Date();
+  const startDate = startOfWeek(currentDate, { weekStartsOn: 0 }).toISOString().split('T')[0];
+  const endDate = addDays(new Date(startDate), 6).toISOString().split('T')[0];
+
+  if (!dateRange.startDate) {
+    setDateRange({ startDate, endDate });
+  }
+
+  const emociones = useFetchEmociones(null, dateRange);
+
+  // Si no hay emociones, mostrar un mensaje
+  if (emociones.length === 0) {
     return (
       <Box className="saludo-container">
         <Typography variant="h5" className="saludo-header">
           Hola {datosPersonales?.nombres} {datosPersonales?.apellidos}
         </Typography>
-        <Box className="saludo-content">
-          <Box className="emoji-container">{getEmoji(emocionPredominante.emocion)}</Box>
-          <Box className="saludo-text">
-            <Typography className="saludo-subtitle">En estos días te has sentido</Typography>
-            <Typography className={`saludo-feeling ${emocionPredominante.emocion.toLowerCase()}`}>
-              {emocionPredominante.emocion}
-            </Typography>
-            <Typography className="saludo-advice">{mensajeRandom}</Typography>
-          </Box>
-        </Box>
+        <Typography variant="body1" align="center" color="textSecondary">
+          No se encontraron emociones registradas en este periodo de tiempo. Empieza a llevar un registro de tus emociones.
+        </Typography>
       </Box>
     );
+  }
+
+  const emocionPredominante = calcularEmocionPredominante(emociones);
+  const mensajeRandom = seleccionarMensajeAleatorio(emocionPredominante.emocion);
+
+  const getEmoji = (emocion) => {
+    switch (emocion) {
+      case 'Feliz':
+        return <img src={Feliz} alt="Feliz" className="emoji-img" />;
+      case 'Triste':
+        return <img src={Triste} alt="Triste" className="emoji-img" />;
+      case 'Enojado':
+        return <img src={Enojado} alt="Enojado" className="emoji-img" />;
+      case 'Disgustado':
+        return <img src={Disgustado} alt="Disgustado" className="emoji-img" />;
+      case 'Miedoso':
+        return <img src={Miedoso} alt="Miedoso" className="emoji-img" />;
+      case 'Neutral':
+        return <img src={Neutral} alt="Neutral" className="emoji-img" />;
+      case 'Sorprendido':
+        return <img src={Sorprendido} alt="Sorprendido" className="emoji-img" />;
+      default:
+        return null;
+    }
   };
-  
-  export default Saludo;
+
+  return (
+    <Box className="saludo-container">
+      <Typography variant="h5" className="saludo-header">
+        Hola {datosPersonales?.nombres} {datosPersonales?.apellidos}
+      </Typography>
+      <Box className="saludo-content">
+        <Box className="emoji-container">{getEmoji(emocionPredominante.emocion)}</Box>
+        <Box className="saludo-text">
+          <Typography className="saludo-subtitle">En estos días te has sentido</Typography>
+          <Typography className={`saludo-feeling ${emocionPredominante.emocion.toLowerCase()}`}>
+            {emocionPredominante.emocion}
+          </Typography>
+          <Typography className="saludo-advice">{mensajeRandom}</Typography>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default Saludo;

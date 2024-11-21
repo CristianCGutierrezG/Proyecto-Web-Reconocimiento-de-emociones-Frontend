@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import useFormPost from '../../../hooks/useFormPost';
 import { AuthContext } from '../../../context/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { TextField, Button, Container, Typography, Box} from '@mui/material';
+import { TextField, Button, Container, Typography, Box, IconButton, InputAdornment } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { jwtDecode } from 'jwt-decode';
 import Loading from '../../../components/loading';
 import '../auth.styles.css';
@@ -13,6 +14,7 @@ export default function LogIn() {
     const { setAuthData } = useContext(AuthContext);
     const [customError, setCustomError] = useState('');
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
 
     const initialValues = {
         email: '',
@@ -23,7 +25,6 @@ export default function LogIn() {
         email: true,
         password: true
     };
-    
 
     const {
         formData,
@@ -41,7 +42,7 @@ export default function LogIn() {
             setAuthData({
                 token: data.token,
                 user: data.user,
-                expiration: decodedToken.exp * 1000, 
+                expiration: decodedToken.exp * 1000,
             });
             navigate('/home');
         }
@@ -55,13 +56,21 @@ export default function LogIn() {
         }
     }, [error]);
 
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
     return (
         <Container component="main" maxWidth="sm" className='container'>
             <Box className="root">
                 <Typography component="h1" variant="h5">
                     Iniciar sesión
                 </Typography>
-                <NavLink to="/registrar" className="link" >
+                <NavLink to="/registrar" className="link">
                     Crea una cuenta
                 </NavLink>
                 <form className="form" onSubmit={handleSubmit}>
@@ -89,15 +98,29 @@ export default function LogIn() {
                         fullWidth
                         name="password"
                         label="Contraseña"
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         id="password"
                         autoComplete="current-password"
                         value={formData.password}
                         onChange={handleChange}
                         error={!!errors.password}
                         helperText={errors.password}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end" >
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                        className='password-icon'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
-                    <NavLink to="/recuperacion" className="link" >
+                    <NavLink to="/recuperacion" className="link">
                         ¿Olvidaste la contraseña?
                     </NavLink>
                     <Button

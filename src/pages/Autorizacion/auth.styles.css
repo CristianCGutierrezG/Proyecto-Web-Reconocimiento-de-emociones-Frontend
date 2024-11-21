@@ -50,3 +50,8 @@ button{
     background-color: var(--textfield-bg-color);
     border-radius: 8px;
 }
+
+.password-icon {
+    margin: 5px !important;
+    background-color: var(--primary-color) !important ;
+}

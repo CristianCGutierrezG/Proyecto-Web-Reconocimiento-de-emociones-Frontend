@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useMemo } from 'react';
 import { Typography } from '@mui/material';
 import { DatosPersonalesContext } from '../../context/DatosPersonalesContext';
 import { AuthContext } from '../../context/AuthContext';
+import Loading from '../loading';
 import useHttp from '../../hooks/useHttp';
 
 function EstudianteInfo({ estudianteId }) {
@@ -31,7 +32,7 @@ function EstudianteInfo({ estudianteId }) {
     }, [estudianteData]);
 
     if (!estudiante) {
-        return <p>Cargando información del estudiante...</p>;
+        return <Loading/>;
     }
 
     return (

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useFetchMateriasProfesor } from '../../../hooks/useFetchMateriasProfesor';
 import useFetchEmocionesMaterias from '../../../hooks/useFetchEmocionesMaterias';
 import { CircularProgress, Alert } from '@mui/material';
-import { startOfYear, endOfYear } from 'date-fns';
+import { startOfWeek, endOfWeek } from 'date-fns';
 import './styles.css'; 
 
-const TopEmocionesNegativas = ({ materiaId }) => {
+const TopEmocionesNegativas = ({ materiaId }) => { 
     const { materiaInfo, loading: loadingMateria } = useFetchMateriasProfesor(materiaId);
     const [dateRange, setDateRange] = useState({ startDate: '', endDate: '' });
     const emociones = useFetchEmocionesMaterias(materiaId, dateRange);
@@ -31,10 +31,10 @@ const TopEmocionesNegativas = ({ materiaId }) => {
 
     useEffect(() => {
         const today = new Date();
-        const startOfYearDate = startOfYear(today);
-        const endOfYearDate = endOfYear(today);
-        const formattedStartDate = startOfYearDate.toISOString().split('T')[0];
-        const formattedEndDate = endOfYearDate.toISOString().split('T')[0];
+        const startOfWeekDate = startOfWeek(today, { weekStartsOn: 1 }); 
+        const endOfWeekDate = endOfWeek(today, { weekStartsOn: 1 });
+        const formattedStartDate = startOfWeekDate.toISOString().split('T')[0];
+        const formattedEndDate = endOfWeekDate.toISOString().split('T')[0];
 
         setDateRange({ startDate: formattedStartDate, endDate: formattedEndDate });
     }, []);

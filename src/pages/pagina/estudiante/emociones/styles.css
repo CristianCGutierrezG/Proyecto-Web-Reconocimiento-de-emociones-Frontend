@@ -1,4 +1,3 @@
-
 body, html {
   height: 100%;
   margin: 0;
@@ -8,15 +7,15 @@ body, html {
 
 .emocionesPage-container {
   display: flex;
-  height: 100vh;
 }
 
 
 .emocionesPage-main {
+  margin-left: 168.5px;
   flex: 1;
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 2fr 0.7fr;
+  grid-template-rows: 1fr 0.7fr;
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
@@ -58,6 +57,6 @@ body, html {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   flex: 1;
   border-radius: 8px;
-  max-height:256px;
+  max-height:270px;
   overflow: hidden;
 }

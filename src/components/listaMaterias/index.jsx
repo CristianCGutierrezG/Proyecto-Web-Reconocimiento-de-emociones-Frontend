@@ -36,24 +36,33 @@ const ListaDeMaterias = ({ estudianteId, allowColorCustomization = false }) => {
   };
 
   return (
-    <div className="lista-materias-wrapper">
-      <Typography variant="h6" color="var(--terniary-color)" gutterBottom>
+    <>
+    <Typography variant="h6" color="var(--terniary-color)" gutterBottom>
         Materias
       </Typography>
+    <div className="lista-materias-wrapper">
+      
       <div className="lista-materias-container">
         <Grid container spacing={2} direction="column">
-          {materiasConColor.map((materia) => (
-            <Grid item key={materia.id}>
-              <MateriaCard
-                materia={materia}
-                allowColorCustomization={allowColorCustomization}
-                onColorChange={handleColorChange}
-              />
-            </Grid>
-          ))}
+          {materiasConColor.length > 0 ? (
+            materiasConColor.map((materia) => (
+              <Grid item key={materia.id}>
+                <MateriaCard
+                  materia={materia}
+                  allowColorCustomization={allowColorCustomization}
+                  onColorChange={handleColorChange}
+                />
+              </Grid>
+            ))
+          ) : (
+            <Typography variant="body1" align="center" color="textSecondary">
+              No se encontraron materias registradas.
+            </Typography>
+          )}
         </Grid>
       </div>
     </div>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import Miedoso from '../../assets/img/Miedoso.png';
 import Neutral from '../../assets/img/Neutral.png';
 import Sorprendido from '../../assets/img/Sorprendido.png';
 import Triste from '../../assets/img/Triste.png';
+import Loading from '../loading';
 
 import { EmocionesContext } from '../../context/EmocionesContext';
 import './styles.css';
@@ -30,6 +31,8 @@ const EmocionPredominante = () => {
         emocion: emocionMasFrecuente,
         porcentaje: ((conteoEmociones[emocionMasFrecuente] / emociones.length) * 100).toFixed(0)
       });
+    } else {
+      setEmocionPredominante(null); // Asegúrate de que se restablezca a null si no hay emociones
     }
   }, [emociones]);
 
@@ -75,13 +78,24 @@ const EmocionPredominante = () => {
     }
   };
 
+  if (emociones.length === 0) {
+    return (
+      <Box className="emocion-container">
+        <Typography variant="h6" className="emocion-title">Emoción predominante</Typography>
+        <Typography variant="body1" align="center" color="textSecondary">
+          No se encontraron emociones registradas.
+        </Typography>
+      </Box>
+    );
+  }
+
   if (!emocionPredominante) {
-    return null;
+    return <Loading />; 
   }
 
   return (
     <Box className={`emocion-container ${getColorClass(emocionPredominante.emocion)}`}>
-      <Typography variant="h6"  className="emocion-title">Emocion predominante</Typography>
+      <Typography variant="h6" className="emocion-title">Emoción predominante</Typography>
       <Box className="emocion-info">
         <Box className="emocion-text-container">
           <Typography className="emocion-value">

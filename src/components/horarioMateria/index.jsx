@@ -1,3 +1,4 @@
+// HorarioMateria.jsx
 import React, { useState } from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
@@ -24,14 +25,19 @@ const HorarioMateria = ({ estudianteId }) => {
 
   const hours = [...Array(24)].map((_, i) => i);
 
-  const getMateriasForDayAndHour = (day, hour) => {
-    return materias.filter((materia) =>
+  // Nueva función para obtener la materia que debe mostrarse por día y hora
+  const getMateriaForDayAndHour = (day, hour) => {
+    // Filtramos las materias que coinciden con el día y la hora
+    const materiasEnHora = materias.filter((materia) =>
       materia.horarios.some(
         (horario) =>
           horario.dia.toLowerCase() === format(day, "EEEE", { locale: es }) &&
           parseInt(horario.horaInicio.split(":")[0], 10) === hour
       )
     );
+
+    // Si hay varias materias, devolvemos solo una para la grilla (la primera)
+    return materiasEnHora.length > 0 ? materiasEnHora[0] : null;
   };
 
   return (
@@ -47,6 +53,20 @@ const HorarioMateria = ({ estudianteId }) => {
           <ArrowForward />
         </IconButton>
       </Box>
+
+      <Box className="horario-days">
+        <Box className="horario-days-box" />
+        <Box className="horario-days-fixed">
+          {[...Array(7)].map((_, index) => (
+            <Box key={index} className="horario-day-fixed">
+              <Typography variant="subtitle1" className="horario-day-title">
+                {format(addDays(currentWeek, index), "EEE dd", { locale: es })}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
       <Box className="horario-container-sup">
         <Box className="horario-container">
           <Box className="horario-hours">
@@ -59,23 +79,20 @@ const HorarioMateria = ({ estudianteId }) => {
           <Box className="horario-grid">
             {[...Array(7)].map((_, index) => (
               <Box key={index} className="horario-day">
-                <Typography variant="subtitle1" className="horario-day-title">
-                  {format(addDays(currentWeek, index), "EEE dd", { locale: es })}
-                </Typography>
                 {hours.map((hour) => {
-                  const materiasEnHora = getMateriasForDayAndHour(
+                  const materia = getMateriaForDayAndHour(
                     addDays(currentWeek, index),
                     hour
                   );
                   return (
                     <Box key={hour} className="horario-hour-slot">
-                      {materiasEnHora.map((materia) => (
+                      {materia && (
                         <Materia
                           key={materia.id}
                           id={materia.id}
                           nombre={materia.nombre}
                         />
-                      ))}
+                      )}
                     </Box>
                   );
                 })}

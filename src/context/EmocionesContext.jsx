@@ -17,6 +17,7 @@ const EmocionesProvider = ({ children }) => {
         let emocionesUrl;
         if (authData && !isTokenExpired()) {
             if (estudianteId) {
+                 setEmociones([]);
                 emocionesUrl = `http://localhost:3001/api/v1/estudiantes/${estudianteId}/emociones`;
             } else if (authData.user?.role === "Estudiante") {
                 emocionesUrl = `http://localhost:3001/api/v1/profile/estudiante-emociones`;
@@ -45,8 +46,12 @@ const EmocionesProvider = ({ children }) => {
         }
     }, [logout, isTokenExpired]);
 
+    const limpiarEmociones = () => {
+        setEmociones([]);
+    };
+
     return (
-        <EmocionesContext.Provider value={{ emociones, setEstudianteId, setDateRange, dateRange }}>
+        <EmocionesContext.Provider value={{ emociones, setEstudianteId, setDateRange, dateRange, limpiarEmociones }}>
             {children}
         </EmocionesContext.Provider>
     );

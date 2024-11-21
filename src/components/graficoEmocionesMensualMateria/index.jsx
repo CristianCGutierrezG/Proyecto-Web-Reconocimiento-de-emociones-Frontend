@@ -152,7 +152,7 @@ const GraficoEmocionesMensualMateria = ({ materiaId, horarios }) => {
         </PieChart>
       ) : (
         <Typography variant="body1" align="center" color="textSecondary">
-          No se encontraron emociones registradas en este periodo de tiempo
+          No se encontraron emociones registradas en este periodo de tiempo.
         </Typography>
       )}
     </Box>

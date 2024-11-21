@@ -1,76 +1,72 @@
-/* styles.css */
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .materiasPage-container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .materiasPage-main {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr 0.7fr;
-    gap: 20px;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .materiasPage-horario {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    background-color: var(--box-color);
-    height: 100%;
-    box-shadow: 0 2px 4px var(--box-shadow-color);
-    position: relative;
-    min-width: 540px;
-    border-radius: 8px;
-  }
-  
-  .materiasPage-sidebar {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 320px
-  }
-  
-  .materiasPage-estudiante-info {
-    color: var(--terniary-color);
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-    padding: 3px;
-    align-items: center;
-    box-shadow: none;
-    text-align: center;
-  }
-  
-  .materiasPage-materia {
-    overflow: hidden;
-    max-height: 465px;
-    background-color: var(--box-color);
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .materiasPage-Buscador {
-    grid-column: 1 / 3; 
-    grid-row: 2 / 3; 
-    background-color: var(--box-color); 
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    
-  }
-  
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.materiasPage-container {
+  display: flex;
+}
+
+.materiasPage-main {
+  margin-left: 168.5px;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 0.7fr;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.materiasPage-horario {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  background-color: var(--box-color);
+  height: 100%;
+  box-shadow: 0 2px 4px var(--box-shadow-color);
+  position: relative;
+  min-width: 540px;
+  border-radius: 8px;
+}
+
+.materiasPage-sidebar {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.materiasPage-estudiante-info {
+  color: var(--terniary-color);
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  padding: 3px;
+  align-items: center;
+  box-shadow: none;
+  text-align: center;
+}
+
+.materiasPage-materia {
+  overflow: hidden;
+  max-height: 481px;
+  background-color: var(--box-color);
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.materiasPage-Buscador {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  background-color: var(--box-color);
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}

@@ -5,11 +5,13 @@
 
 
 .contactoPage-main {
+    margin-left: 168.5px;
     display: flex;
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto; 
     max-height: 100%;
+    height: 100vh;
     width: 100%;
 }
 

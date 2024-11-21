@@ -4,12 +4,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import InscribirEstudianteDialog from './inscribirEstudianteDialog';
 import Swal from 'sweetalert2';
+import Loading from '../loading';
 import useHttp from '../../hooks/useHttp';
 import './styles.css';
 
 export default function ListaEstudianteInscribir({ inscritos, estudiantes, materiaId }) {
     const [open, setOpen] = useState(false);
-    const { data, sendRequest: deleteRequest, errorResponse, error } = useHttp();
+    const { data, sendRequest: deleteRequest, loading, errorResponse, error } = useHttp();
 
     const handleAddClick = () => {
         setOpen(true);
@@ -75,6 +76,11 @@ export default function ListaEstudianteInscribir({ inscritos, estudiantes, mater
                 </IconButton>
             </div>
             <Divider className="listaEstudiantes-divider" />
+
+            {loading && (
+                <Loading />
+            )}
+            
             <TableContainer component={Paper} className="tableInscripcion-container">
                 <Table className="table">
                     <TableHead>

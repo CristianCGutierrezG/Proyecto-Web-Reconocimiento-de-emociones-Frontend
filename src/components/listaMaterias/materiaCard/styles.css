@@ -2,6 +2,7 @@
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  position: relative;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -36,10 +37,13 @@
   border-radius: 50%;
 }
 
-.materia-card {
-  position: relative;
-  padding: 16px;
-  border-radius: 8px;
+.materia-card input[type='color'] {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
 }
 
 .color-indicator {
@@ -49,4 +53,10 @@
   top: 16px;
   right: 16px;
   border-radius: 50%;
+}
+
+.deleteButton{
+  margin: 0px !important; 
+  color: var(--warning-color) !important;
+  background-color: var(--primary-color) !important;
 }

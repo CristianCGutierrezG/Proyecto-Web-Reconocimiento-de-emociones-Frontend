@@ -4,7 +4,6 @@
   align-items: center;
   padding: 12px;
   font-family: Arial, sans-serif;
-  overflow-x: auto;
 }
 
 .horario-header {
@@ -14,6 +13,40 @@
   width: 100%;
   margin-bottom: 16px;
   color: var(--terniary-color);
+}
+
+.horario-days{
+  width: 100%;
+  display: flex;
+  padding-right: 26px;
+  margin-bottom: 2px;
+}
+
+.horario-days-box{
+  display: flex;
+  width: 68px;
+  flex-shrink: 0;
+}
+
+.horario-days-fixed {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  gap: 1px;
+  top: 0;
+  background-color: var(--complementary-color);
+  z-index: 1;
+}
+
+.horario-day-fixed {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  background-color: var(--box-color);
+  color: var(--text-color);
+  font-weight: bold;
 }
 
 .horario-container-sup {
@@ -40,16 +73,14 @@
 .horario-container {
   display: flex;
   width: 100%;
-  overflow-x: auto;
 }
 
 .horario-hours {
   display: flex;
   flex-direction: column;
   width: 60px;
-  margin-top: 29px;
+  margin-top: 1px;
   flex-shrink: 0;
-
 }
 
 .horario-hour {
@@ -65,7 +96,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  overflow-x: auto;
 }
 
 .horario-day {
@@ -81,8 +111,7 @@
 }
 
 .horario-day-title {
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: bold !important;
 }
 
 .horario-hour-slot {

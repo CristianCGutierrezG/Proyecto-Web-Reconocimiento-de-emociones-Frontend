@@ -1,13 +1,10 @@
-import React, {useContext, useState} from 'react';
-//Contextos
-import { AuthContext } from '../../context/AuthContext'
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import { DatosPersonalesContext } from '../../context/DatosPersonalesContext';
 import RecognitionArea from '../areaReconocimiento/areaReconocimiento';
-import CameraCapture  from '../imagenes';
 
-
-//Material UI
-import { List, ListItem, ListItemIcon, ListItemText, Box, Typography, Divider, Button} from '@mui/material';
+// Material UI
+import { List, ListItem, ListItemIcon, ListItemText, Box, Typography, Divider, Button } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import SchoolIcon from '@mui/icons-material/School';
@@ -16,7 +13,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { styled } from '@mui/material/styles';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-//Estilos
+// Estilos
 import './styles.css';
 
 const CustomListItem = styled(ListItem)(({ theme }) => ({
@@ -37,8 +34,7 @@ const menuIcons = {
 
 export default function Menu() {
     const { authData, logout } = useContext(AuthContext);
-    const { datosPersonales} = useContext(DatosPersonalesContext);
-    const [showLogout, setShowLogout] = useState(false);
+    const { datosPersonales } = useContext(DatosPersonalesContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -47,21 +43,21 @@ export default function Menu() {
     };
 
     const links = {
-        "Profesor": {
+        Profesor: {
             home: '/home',
             emociones: '/emociones/profesor',
             materias: '/materias/profesor',
             contacto: '',
             ajustes: '/home',
         },
-        "Estudiante": {
+        Estudiante: {
             home: '/home',
             emociones: '/emociones/estudiante',
             materias: '/materias/estudiante',
             contacto: '/contacto/estudiante',
             ajustes: '/configuracion/estudiante',
         },
-        "Profesional de salud": {
+        'Profesional de salud': {
             home: '/home',
             emociones: '/emociones/proSalud',
             materias: '',
@@ -75,37 +71,43 @@ export default function Menu() {
     return (
         <Box className="menu-container">
             <List>
-                {Object.keys(selectedLinks).map(item => (
-                    selectedLinks[item] ? (
-                        <NavLink
-                            key={item}
-                            to={selectedLinks[item]}
-                            className={({ isActive }) => isActive ? 'menu-link active' : 'menu-link'}
-                        >
-                            <CustomListItem button>
-                                <ListItemIcon>
-                                    {menuIcons[item]}
-                                </ListItemIcon>
-                                <ListItemText primary={item.charAt(0).toUpperCase() + item.slice(1)} />
-                            </CustomListItem>
-                        </NavLink>
-                    ) : null
-                ))}
+                {Object.keys(selectedLinks).map(
+                    (item) =>
+                        selectedLinks[item] && (
+                            <NavLink
+                                key={item}
+                                to={selectedLinks[item]}
+                                className={({ isActive }) =>
+                                    isActive ? 'menu-link active' : 'menu-link'
+                                }
+                            >
+                                <CustomListItem button>
+                                    <ListItemIcon>{menuIcons[item]}</ListItemIcon>
+                                    <ListItemText primary={item.charAt(0).toUpperCase() + item.slice(1)} />
+                                </CustomListItem>
+                            </NavLink>
+                        )
+                )}
             </List>
             <Divider className="menu-divider" />
-            <Box
-                className="user-info"
-                onMouseEnter={() => setShowLogout(true)}
-                onMouseLeave={() => setShowLogout(false)}
-            >
-                <Typography variant="subtitle1">{datosPersonales?.nombres} {datosPersonales?.apellidos}</Typography>
+
+            <Box className="user-info">
+                <Typography variant="subtitle1">
+                    {datosPersonales?.nombres} {datosPersonales?.apellidos}
+                </Typography>
                 <Typography variant="subtitle2">{datosPersonales?.codigoInstitucional}</Typography>
-                {showLogout && (
-                    <Button variant="contained" color="secondary" onClick={handleLogout}>
-                        Cerrar Sesión
-                    </Button>
-                )}
+                
+
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleLogout}
+                    className="logout-button"
+                >
+                    Cerrar Sesión
+                </Button>
             </Box>
+            
             <div style={{ display: 'none' }}>
                 <RecognitionArea />
             </div>

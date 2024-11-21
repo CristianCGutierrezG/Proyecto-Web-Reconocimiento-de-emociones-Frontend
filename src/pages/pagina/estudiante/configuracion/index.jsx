@@ -6,23 +6,23 @@ import Ajustes from '../../../../components/ajustes';
 
 const styles = {
     appContainer: {
-        display: 'flex',   // Alinea los componentes horizontalmente
-        height: '100vh',   // Hace que el contenedor ocupe toda la altura de la pantalla
+        display: 'flex',   
+        height: '100vh',   
     },
     sidebar: {
-        width: '20%',      // El menú izquierdo ocupa el 20% del ancho
+        width: '20%',      
         backgroundColor: '#E8EAF6',
-        minHeight: '100vh', // Asegura que el menú ocupe toda la altura de la pantalla
+        minHeight: '100vh', 
         padding: '20px',
-        boxSizing: 'border-box', // Para incluir el padding en el ancho
+        boxSizing: 'border-box',
     },
     mainArea: {
-        width: '80%',       // El área principal ocupa el 80% del ancho
+        width: '80%',       
         padding: '5%',
-        display: 'flex',    // Hace que el contenido dentro de mainArea sea flexible
-        flexDirection: 'column', // Alinea los elementos internos verticalmente
+        display: 'flex',    
+        flexDirection: 'column', 
         alignItems: 'center',
-        position: 'relative',    // Para colocar el botón de información en la esquina
+        position: 'relative',    
         backgroundColor: '#677C99',
     }
 };

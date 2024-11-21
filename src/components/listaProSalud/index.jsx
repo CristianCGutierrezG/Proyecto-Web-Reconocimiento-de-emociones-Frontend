@@ -23,7 +23,6 @@ export default function ListaProSalud() {
 
     return (
         <div>
-            {/* Title */}
             <Typography variant="h6" gutterBottom className="listaEstudiantes-title">
                 Contacto
             </Typography>
@@ -31,19 +30,17 @@ export default function ListaProSalud() {
             <Typography variant="h1" gutterBottom className="lista-Subtitle">
                 Ponte en contacto con algún profesional de salud si lo necesitas
             </Typography>
-            {/* Loading indicator */}
+
             {loading && (
                 <Loading />
             )}
 
-            {/* Error message */}
             {error && (
                 <Alert severity="error" className="error-message">
                     Ocurrió un error al cargar los datos de ProSalud: {error.message}
                 </Alert>
             )}
 
-            {/* ProSalud List Table */}
             {!error && proSalud && (
                 <TableContainer component={Paper} className="tableEmociones-container">
                     <Table className="table">

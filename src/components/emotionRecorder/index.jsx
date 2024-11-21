@@ -15,14 +15,11 @@ const EmotionRecorder = () => {
 
     return (
         <Box className={`emotion-recorder-container ${isActive ? 'active' : 'inactive'}`}>
-            {/* Caja con IA y círculo */}
             <Box className="emotion-recorder-box">
                 <Typography variant="h3" className="emotion-recorder-text">IA</Typography>
-                {/* Cambiamos el color del círculo con base en el estado */}
                 <div className={`circle ${isActive ? 'active-circle' : 'inactive-circle'}`} />
             </Box>
 
-            {/* Botón para cambiar estado */}
             <Box className="emotion-recorder-content">
                 <Button 
                     variant="contained" 

@@ -1,7 +1,7 @@
-
 .menu-container {
-    /* position: sticky; */
-    width: 200px;
+    position: fixed;
+    z-index: 1000;
+    width: 170px;
     background-color: var(--primary-color);
     height: 100vh;
     display: flex;
@@ -12,7 +12,6 @@
 .menu-link {
     text-decoration: none;
     color: inherit;
-
 }
 
 .menu-link.active .MuiListItemIcon-root,
@@ -29,18 +28,18 @@
 .user-info {
     padding: 20px;
     text-align: center;
-    position: relative;
 }
 
-.user-info .MuiButton-root {
-    display: none;
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
+.logout-button {
+    margin-top: 15px !important;
+    font-weight: bold !important;
     width: 100%;
+    color: var(--text-color) !important;
+    background-color: var(--primary-color)  !important;
+    transition: background-color 0.3s ease  !important;
 }
 
-.user-info:hover .MuiButton-root {
-    display: block;
+.logout-button:hover {
+    background-color: var(--secondary-color) !important;
+    color: var(--complementary-color) !important;
 }

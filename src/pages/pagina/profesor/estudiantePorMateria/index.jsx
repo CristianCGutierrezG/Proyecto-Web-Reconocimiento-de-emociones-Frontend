@@ -7,6 +7,7 @@ import { useFetchMateriasProfesor } from '../../../../hooks/useFetchMateriasProf
 import Swal from 'sweetalert2';
 import EditarMateriaDialog from '../../../../components/editarMateria';
 import useHttp from '../../../../hooks/useHttp';
+import Loading from '../../../../components/loading';
 import './styles.css';
 
 export default function EstudiantesPorMateria() {
@@ -62,7 +63,7 @@ export default function EstudiantesPorMateria() {
         setOpenEditDialog(false);
     };
 
-    if (loading) return <CircularProgress />;
+    if (loading) return <Loading />;
     if (error) return <Typography color="error">Error al cargar los datos</Typography>;
 
     return (
