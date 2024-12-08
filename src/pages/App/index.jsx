@@ -49,6 +49,10 @@ function App() {
                 }
               >
                 <Route path="/home" element={<Home />} />
+                <Route
+                  path="/configuracion"
+                  element={<ConfiguracionEstudiante />}
+                />
               </Route>
               <Route
                 element={
@@ -104,10 +108,6 @@ function App() {
                 <Route
                   path="/materias/estudiante"
                   element={<MateriasEstudiante />}
-                />
-                <Route
-                  path="/configuracion/estudiante"
-                  element={<ConfiguracionEstudiante />}
                 />
                 <Route
                   path="/contacto/estudiante"

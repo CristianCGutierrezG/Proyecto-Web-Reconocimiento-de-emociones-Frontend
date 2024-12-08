@@ -22,19 +22,23 @@ const useFormPost = (initialValues, requiredFields, url, method = 'POST', header
         const validationErrors = validate(formData, requiredFields);
         setErrors(validationErrors);
         if (Object.keys(validationErrors).length === 0) {
-            if (authData && isTokenExpired()) {
-                alert('Session has expired. Please log in again.');
-                logout();
-            } else {
-                let transformedData = formData;
-                if (transformData) {
-                    transformedData = transformData(formData);
-                }
-                
-                await sendRequest(url, method, transformedData, header);
+          if (authData && isTokenExpired()) {
+            alert("Session has expired. Please log in again.");
+            logout();
+          } else {
+            let transformedData = formData;
+            if (transformData) {
+              transformedData = transformData(formData);
             }
+            try {
+              const response = await sendRequest(url, method, transformedData, header);
+              console.log("Server response:", response); 
+            } catch (err) {
+              console.error("Error:", err);
+            }
+          }
         }
-    };
+      };
 
     const resetForm = () => {
         setFormData(initialValues);
